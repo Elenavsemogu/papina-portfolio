@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAPINA. — Full-stack Product Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F5F3EF;
+            --text: #1A1A1A;
+            --accent: #FF4D00;
+            --accent-light: #FF6B35;
+            --accent-glow: rgba(255, 77, 0, 0.4);
+            --muted: #8A8A8A;
+            --card-bg: #FFFFFF;
+            --border: rgba(26, 26, 26, 0.08);
+
+            /* LEGO P letter scale - responsive */
+            --lego-scale: 1;
+            --lego-base-x: 72%;
+            --lego-base-y: 50%;
+        }
+
+        .tech-mode {
+            --bg: #0D0D0D;
+            --text: #FFFFFF;
+            --muted: rgba(255, 255, 255, 0.6);
+            --card-bg: rgba(255, 77, 0, 0.03);
+            --border: rgba(255, 77, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            overflow-x: hidden;
+            transition: background 0.8s ease, color 0.6s ease;
+        }
+
+        /* Matrix Rain Canvas */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .tech-mode #matrix-canvas {
+            opacity: 0.08;
+        }
+
+        /* Gradient overlay for tech mode */
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(255, 77, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 107, 53, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 77, 0, 0.03) 0%, transparent 70%);
+        }
+
+        .tech-mode .gradient-overlay {
+            opacity: 1;
+        }
+
+        /* Navigation - Floating elements */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            padding: 0;
+            backdrop-filter: none;
+            transition: all 0.6s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px 10px 10px;
+            border-radius: 100px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .logo {
+            background: rgba(13, 13, 13, 0.95);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 77, 0, 0.2);
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Unbounded', cursive;
+            font-size: 24px;
+            font-weight: 900;
+            color: white;
+            position: relative;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .logo-icon {
+            box-shadow: 0 0 30px rgba(255, 77, 0, 0.4);
+        }
+
+        .logo-dot {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            animation: pulse 2.5s ease-in-out infinite;
+            transition: border-color 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 var(--accent-glow); }
+            50% { transform: scale(1.1); box-shadow: 0 0 15px 5px var(--accent-glow); }
+        }
+
+        .logo-text {
+            font-family: 'Unbounded', cursive;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+            transition: all 0.6s ease;
+        }
+
+        /* Mobile: hide logo text, only show icon */
+        @media (max-width: 768px) {
+            .logo-text {
+                display: none;
+            }
+
+            .logo {
+                padding: 10px;
+            }
+
+            nav {
+                top: 16px;
+                left: 16px;
+                right: 16px;
+            }
+
+            .nav-link.cta {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+
+            /* Mode switcher fixed at bottom center */
+            .mode-switcher {
+                position: fixed;
+                bottom: 24px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1001;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        /* Mode Switcher */
+        .mode-switcher {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 4px;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .mode-switcher {
+            background: rgba(255, 77, 0, 0.05);
+            border-color: rgba(255, 77, 0, 0.2);
+        }
+
+        .mode-btn {
+            padding: 10px 24px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mode-btn.active {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .tech-mode .mode-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .tech-mode .mode-btn.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 25px rgba(255, 77, 0, 0.5);
+        }
+
+        .mode-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        /* Hide non-CTA links */
+        .nav-link:not(.cta) {
+            display: none;
+        }
+
+        .nav-link.cta {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text);
+            padding: 14px 28px;
+            border-radius: 100px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            border: none;
+            font-weight: 600;
+        }
+
+        .nav-link.cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
+        }
+
+        .tech-mode .nav-link.cta {
+            background: rgba(255, 77, 0, 0.95);
+            color: white;
+            box-shadow: 0 4px 24px rgba(255, 77, 0, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        /* ==========================================
+           HERO SECTION - LEGO PLATFORM
+           ========================================== */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden; /* Prevent bricks from going outside viewport */
+        }
+
+        /* LEGO Platform Background - Human Mode */
+        .lego-world {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                #FF5500 0%,
+                #FF4D00 25%,
+                #FF4000 50%,
+                #E84400 75%,
+                #D63D00 100%
+            );
+            transition: opacity 0.8s ease;
+        }
+
+        .tech-mode .lego-world {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Stud grid */
+        .stud-grid {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(var(--cols), 1fr);
+            grid-template-rows: repeat(var(--rows), 1fr);
+            padding: 10px;
+            gap: 6px;
+        }
+
+        .stud {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: 
+                radial-gradient(ellipse 60% 40% at 35% 30%, rgba(255,255,255,0.5) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 100% at 50% 50%, #FF5500 0%, #E84400 100%);
+            box-shadow: 
+                inset 0 -4px 8px rgba(0,0,0,0.25),
+                inset 0 2px 4px rgba(255,255,255,0.3),
+                0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Hero content card */
+        .hero-card {
+            position: absolute;
+            top: 50%;
+            left: 32px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.97);
+            padding: 32px;
+            border-radius: 28px;
+            width: 360px;
+            max-width: calc(100vw - 64px);
+            box-shadow:
+                0 32px 80px rgba(0,0,0,0.2),
+                0 0 0 1px rgba(255,255,255,0.5);
+            z-index: 100;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .hero-card {
+            background: rgba(13, 13, 13, 0.95);
+            border: 1px solid var(--border);
+            box-shadow: 
+                0 32px 80px rgba(0,0,0,0.4),
+                0 0 60px rgba(255, 77, 0, 0.1);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #22C55E;
+            margin-bottom: 20px;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .hero-badge {
+            background: rgba(255, 77, 0, 0.1);
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #22C55E;
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .tech-mode .badge-dot {
+            background: var(--accent);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .hero-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+            color: var(--text);
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .hero-title {
+            text-shadow: 0 0 40px rgba(255, 77, 0, 0.3);
+        }
+
+        .hero-title .accent {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+            color: var(--muted);
+            margin-bottom: 28px;
+            line-height: 1.7;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .hero-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .btn-primary {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .tech-mode .btn-primary {
+            background: var(--accent);
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .tech-mode .btn-primary:hover {
+            box-shadow: 0 8px 32px rgba(255, 77, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .tech-mode .btn-secondary {
+            border-color: rgba(255, 77, 0, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-hint {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 600;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .hero-hint {
+            display: none;
+        }
+
+        /* Tech mode hero visual */
+        .tech-visual {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .tech-visual {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .code-window {
+            width: 420px;
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 77, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 80px rgba(255, 77, 0, 0.15),
+                0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .code-header {
+            background: rgba(255, 77, 0, 0.08);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 77, 0, 0.1);
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #FF5F57; }
+        .code-dot.yellow { background: #FFBD2E; }
+        .code-dot.green { background: #28CA41; }
+
+        .code-title {
+            margin-left: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .code-body {
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .code-line {
+            display: flex;
+            gap: 12px;
+        }
+
+        .line-number {
+            color: rgba(255, 255, 255, 0.2);
+            user-select: none;
+            width: 24px;
+            text-align: right;
+        }
+
+        .code-keyword { color: var(--accent); }
+        .code-string { color: #A5D6FF; }
+        .code-variable { color: #FFA657; }
+        .code-bracket { color: rgba(255, 255, 255, 0.6); }
+
+        .code-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 16px;
+            background: var(--accent);
+            animation: cursor-blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        @keyframes cursor-blink {
+            0%, 45% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Letter P Container - for proper scaling */
+        .letter-p-container {
+            position: absolute;
+            top: 50%;
+            left: 72%;
+            transform: translate(-50%, -50%);
+            width: 270px;  /* 6 columns * 45px */
+            height: 360px; /* 8 rows * 45px */
+            transition: transform 0.6s ease;
+            z-index: 50;
+            overflow: visible; /* Allow scattered bricks to go outside */
+        }
+
+        /* LEGO Bricks */
+        .lego-brick {
+            position: absolute;
+            background: linear-gradient(
+                145deg,
+                #FFFFFF 0%,
+                #FAFAFA 30%,
+                #F0F0F0 100%
+            );
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 50;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:
+                0 6px 0 #D4D4D4,
+                0 8px 20px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,1);
+        }
+
+        .tech-mode .lego-brick {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .tech-mode .letter-p-container {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .brick-studs {
+            position: absolute;
+            inset: 6px;
+            display: grid;
+            gap: 4px;
+        }
+
+        .brick-stud {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: 
+                radial-gradient(ellipse 50% 35% at 35% 30%, rgba(255,255,255,0.9) 0%, transparent 60%),
+                linear-gradient(145deg, #FFFFFF 0%, #E8E8E8 100%);
+            box-shadow: 
+                inset 0 -3px 6px rgba(0,0,0,0.12),
+                inset 0 2px 3px rgba(255,255,255,0.9),
+                0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Brick sizes - CELL = 45px */
+        .brick-2x2 { width: 90px; height: 90px; }   /* 2 cols x 2 rows */
+        .brick-2x2 .brick-studs { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+
+        .brick-2x3 { width: 90px; height: 135px; }  /* 2 cols x 3 rows */
+        .brick-2x3 .brick-studs { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
+
+        .brick-2x4 { width: 90px; height: 180px; }  /* 2 cols x 4 rows */
+        .brick-2x4 .brick-studs { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); }
+
+        .brick-4x2 { width: 180px; height: 90px; }  /* 4 cols x 2 rows */
+        .brick-4x2 .brick-studs { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); }
+
+        /* Brick animations */
+        .lego-brick:not(.placed) {
+            animation: brick-wiggle 3s ease-in-out infinite;
+        }
+
+        .lego-brick:nth-child(1) { animation-delay: 0s; }
+        .lego-brick:nth-child(2) { animation-delay: 0.5s; }
+        .lego-brick:nth-child(3) { animation-delay: 1s; }
+        .lego-brick:nth-child(4) { animation-delay: 1.5s; }
+        .lego-brick:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes brick-wiggle {
+            0%, 100% { transform: rotate(var(--rot)) scale(1); }
+            25% { transform: rotate(calc(var(--rot) - 1.5deg)) scale(1.02); }
+            75% { transform: rotate(calc(var(--rot) + 1.5deg)) scale(1.02); }
+        }
+
+        .lego-brick:not(.placed)::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.3);
+            animation: glow-pulse 2s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+
+        .lego-brick:not(.placed):hover {
+            transform: rotate(var(--rot)) scale(1.12) !important;
+            box-shadow: 
+                0 12px 0 #D4D4D4,
+                0 20px 40px rgba(0,0,0,0.35),
+                0 0 30px rgba(255,255,255,0.5);
+            z-index: 60;
+        }
+
+        .lego-brick.placed {
+            animation: none;
+            cursor: default;
+        }
+
+        .lego-brick.placed::after {
+            display: none;
+        }
+
+        /* Target ghosts */
+        .target-ghost {
+            position: absolute;
+            border: 3px dashed rgba(255,255,255,0.25);
+            border-radius: 8px;
+            z-index: 5;
+            transition: opacity 0.3s ease;
+        }
+
+        .target-ghost.filled {
+            opacity: 0;
+        }
+
+        .tech-mode .target-ghost {
+            opacity: 0;
+        }
+
+        .tech-mode .letter-p-container .target-ghost {
+            display: none;
+        }
+
+        /* Progress */
+        .lego-progress {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 28px;
+            background: rgba(255,255,255,0.97);
+            border-radius: 100px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .lego-progress {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .progress-bar {
+            width: 140px;
+            height: 8px;
+            background: rgba(0,0,0,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border-radius: 4px;
+            transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            width: 0%;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .reset-btn {
+            width: 38px;
+            height: 38px;
+            background: transparent;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .reset-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(180deg);
+        }
+
+        /* Completion Message - Stylish Design */
+        .completion-message {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            z-index: 60;
+        }
+
+        .completion-message.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .completion-message p {
+            font-family: 'Unbounded', cursive;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .tech-mode .completion-message p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            text-shadow: 0 0 30px rgba(255, 77, 0, 0.8);
+        }
+
+        .completion-message button {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .completion-message button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .tech-mode .completion-message button {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            border-color: rgba(255, 77, 0, 0.8);
+            color: var(--accent);
+        }
+
+        .tech-mode .completion-message button:hover {
+            background: rgba(255, 77, 0, 0.15);
+            border-color: var(--accent);
+        }
+
+        /* Hide progress when completed */
+        .lego-progress.completed {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           OTHER SECTIONS
+           ========================================== */
+        .section {
+            padding: 120px 48px;
+            position: relative;
+            z-index: 10;
+            background: var(--bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .section-label {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .section-title {
+            font-family: 'Unbounded', cursive;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .section-title {
+            text-shadow: 0 0 40px rgba(255, 77, 0, 0.2);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 32px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tech-mode .service-card {
+            background: rgba(255, 77, 0, 0.03);
+            border-color: rgba(255, 77, 0, 0.15);
+        }
+
+        .tech-mode .service-card:hover {
+            box-shadow: 0 0 50px rgba(255, 77, 0, 0.1);
+            border-color: rgba(255, 77, 0, 0.3);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Unbounded', cursive;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .tech-mode .service-icon {
+            background: rgba(255, 77, 0, 0.15);
+            border: 1px solid rgba(255, 77, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 77, 0, 0.2);
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .service-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            transition: all 0.4s ease;
+        }
+
+        .tech-mode .service-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+        }
+
+        .service-desc {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .tech-mode .service-desc {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .service-tag {
+            padding: 4px 12px;
+            background: rgba(255, 77, 0, 0.1);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .tech-mode .service-tag {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 77, 0, 0.1);
+            border: 1px solid rgba(255, 77, 0, 0.2);
+        }
+
+        /* Process Section */
+        .process-section {
+            background: var(--text);
+            color: var(--bg);
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .process-section {
+            background: rgba(255, 77, 0, 0.03);
+            color: var(--text);
+            border-top: 1px solid rgba(255, 77, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 77, 0, 0.15);
+        }
+
+        .process-section .section-title {
+            color: var(--bg);
+        }
+
+        .tech-mode .process-section .section-title {
+            color: var(--text);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .process-number {
+            font-family: 'Unbounded', cursive;
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .tech-mode .process-number {
+            text-shadow: 0 0 40px rgba(255, 77, 0, 0.5);
+        }
+
+        .process-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            transition: all 0.4s ease;
+        }
+
+        .tech-mode .process-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+        }
+
+        .process-desc {
+            font-size: 14px;
+            opacity: 0.7;
+            line-height: 1.6;
+            transition: all 0.4s ease;
+        }
+
+        .tech-mode .process-desc {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .cta-section {
+            background: var(--bg);
+            border-top: 1px solid rgba(255, 77, 0, 0.3);
+        }
+
+        .cta-section .section-title {
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .tech-mode .cta-section .section-title {
+            color: var(--text);
+            text-shadow: 0 0 60px rgba(255, 77, 0, 0.4);
+        }
+
+        .cta-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .tech-mode .cta-subtitle {
+            color: var(--muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+        }
+
+        .cta-section .btn-primary {
+            background: white;
+            color: var(--accent);
+        }
+
+        .tech-mode .cta-section .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 50px rgba(255, 77, 0, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+            transition: all 0.6s ease;
+        }
+
+        .footer-text {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .tech-mode .footer-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text);
+        }
+
+        .tech-mode .footer-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .tech-mode .footer-link:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        /* TABLET: 768px - 1024px - Side by side layout */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .hero {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            /* Ensure LEGO world covers entire background */
+            .lego-world {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .stud-grid {
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .hero-card {
+                position: relative;
+                left: 0;
+                top: 0;
+                transform: none;
+                width: 45%;
+                max-width: 420px;
+                padding: 32px 28px;
+                margin: 0 0 0 32px;
+                flex-shrink: 0;
+            }
+
+            /* Scale letter P container for tablet - shifted right from card */
+            .letter-p-container {
+                left: 65%;
+                transform: translate(-30%, -50%) scale(0.75);
+            }
+
+            .lego-progress {
+                transform: translateX(-50%) scale(0.85);
+            }
+
+            .completion-message {
+                left: 65%;
+                transform: translateX(-50%);
+                max-width: 300px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 12px 18px;
+                font-size: 13px;
+            }
+
+            /* LEGO zone takes remaining space */
+            .lego-world,
+            .stud-grid {
+                width: 55%;
+                margin-left: auto;
+            }
+
+            .lego-brick,
+            .target-ghost {
+                /* Positions relative to right 55% of screen */
+            }
+
+            .lego-progress {
+                bottom: 32px;
+                left: auto;
+                right: 5%;
+                transform: none;
+            }
+
+            .tech-visual {
+                right: 5%;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                padding: 16px 24px;
+            }
+
+            .section {
+                padding: 80px 24px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .tech-visual {
+                display: none;
+            }
+        }
+
+        /* MOBILE: <= 768px - Vertical layout */
+        @media (max-width: 768px) {
+            .hero {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            /* Card at top - compact and limited */
+            .hero-card {
+                position: relative;
+                left: 0;
+                right: 0;
+                top: 0;
+                transform: none;
+                width: calc(100% - 32px);
+                max-width: none;
+                max-height: 35vh;
+                margin-top: 120px;
+                margin-left: 16px;
+                margin-right: 16px;
+                margin-bottom: 16px;
+                padding: 20px;
+                flex-shrink: 0;
+                overflow: hidden;
+            }
+
+            .hero-title {
+                font-size: 20px;
+                line-height: 1.2;
+                margin-bottom: 12px;
+            }
+
+            /* Hide subtitle for compactness */
+            .hero-subtitle {
+                display: none;
+            }
+
+            .hero-badge {
+                font-size: 11px;
+                padding: 6px 12px;
+                margin-bottom: 12px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 0;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 12px;
+                width: 100%;
+                text-align: center;
+            }
+
+            /* Hide hint on mobile */
+            .hero-hint {
+                display: none;
+            }
+
+            /* Scale letter P container for mobile - larger for visibility */
+            .letter-p-container {
+                left: 50%;
+                top: 55%;
+                transform: translate(-50%, -50%) scale(0.65);
+            }
+
+            .lego-progress {
+                position: fixed;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%) scale(0.85);
+                z-index: 100;
+            }
+
+            .completion-message {
+                bottom: 120px;
+                padding: 0 20px;
+            }
+
+            .completion-message p {
+                font-size: 14px;
+            }
+
+            .completion-message button {
+                font-size: 12px;
+                padding: 10px 20px;
+            }
+
+            .mode-switcher {
+                position: fixed;
+                bottom: 24px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1001;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-right .nav-link:not(.cta) {
+                display: none;
+            }
+
+            .section {
+                padding: 80px 24px;
+                position: relative;
+                z-index: 10;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+
+        /* SMALL MOBILE: <= 480px */
+        @media (max-width: 480px) {
+            .hero-card {
+                margin-top: 70px;
+                padding: 16px;
+                max-height: 32vh;
+            }
+
+            .hero-title {
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+
+            .hero-badge {
+                font-size: 10px;
+                padding: 5px 10px;
+                margin-bottom: 10px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 9px 14px;
+                font-size: 11px;
+                width: 100%;
+            }
+
+            /* Scale letter P container even smaller */
+            .letter-p-container {
+                transform: translate(-50%, -50%) scale(0.4);
+            }
+
+            .lego-progress {
+                bottom: 85px;
+                padding: 12px 20px;
+                transform: translateX(-50%) scale(0.8);
+            }
+
+            .completion-message {
+                bottom: 105px;
+                padding: 0 16px;
+            }
+
+            .completion-message p {
+                font-size: 13px;
+            }
+
+            .completion-message button {
+                font-size: 11px;
+                padding: 9px 18px;
+            }
+
+            .progress-bar {
+                width: 100px;
+            }
+
+            .progress-text {
+                font-size: 12px;
+            }
+
+            .reset-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix-canvas"></canvas>
+    <div class="gradient-overlay"></div>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">
+                P
+                <span class="logo-dot"></span>
+            </div>
+            <span class="logo-text">PAPINA</span>
+        </div>
+
+        <div class="mode-switcher">
+            <button class="mode-btn active" data-mode="human">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                Human
+            </button>
+            <button class="mode-btn" data-mode="tech">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                </svg>
+                Tech
+            </button>
+        </div>
+
+        <div class="nav-right">
+            <a href="#services" class="nav-link">Услуги</a>
+            <a href="#contact" class="nav-link cta">Связаться</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <!-- LEGO World Background -->
+        <div class="lego-world">
+            <div class="stud-grid" id="studGrid"></div>
+        </div>
+
+        <!-- Letter P Container - all bricks and ghosts go here -->
+        <div class="letter-p-container" id="letterPContainer"></div>
+
+        <!-- Hero Content Card -->
+        <div class="hero-card">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span class="badge-text-human">Открыта к проектам</span>
+                <span class="badge-text-tech" style="display: none;">status: available</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-human">Вы приходите с идеей — уходите с <span class="accent">продуктом</span></span>
+                <span class="title-tech" style="display: none;">from <span class="accent">concept</span><br>to production</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span class="subtitle-human">Full-stack Product Manager. Исследования, дизайн, код — полный цикл в одних руках.</span>
+                <span class="subtitle-tech" style="display: none;">// Full-stack PM & Developer<br>// Research → Design → Code → Deploy</span>
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">
+                    <span class="cta-human">Обсудить проект</span>
+                    <span class="cta-tech" style="display: none;">init project</span>
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    <span class="cta-human-2">Портфолио</span>
+                    <span class="cta-tech-2" style="display: none;">view stack</span>
+                </a>
+            </div>
+            <div class="hero-hint">
+                Нажми на блоки — собери P
+            </div>
+        </div>
+
+        <!-- Tech Mode Visual -->
+        <div class="tech-visual">
+            <div class="code-window">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span class="code-title">project.config.ts</span>
+                </div>
+                <div class="code-body">
+                    <div class="code-line">
+                        <span class="line-number">1</span>
+                        <span><span class="code-keyword">const</span> <span class="code-variable">project</span> <span class="code-bracket">=</span> <span class="code-bracket">{</span></span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">2</span>
+                        <span>  <span class="code-variable">stack</span>: <span class="code-bracket">[</span><span class="code-string">"React"</span>, <span class="code-string">"Node"</span><span class="code-bracket">]</span>,</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">3</span>
+                        <span>  <span class="code-variable">database</span>: <span class="code-string">"PostgreSQL"</span>,</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">4</span>
+                        <span>  <span class="code-variable">status</span>: <span class="code-string">"production"</span>,</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">5</span>
+                        <span><span class="code-bracket">}</span>;</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">6</span>
+                        <span></span>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">7</span>
+                        <span><span class="code-variable">deploy</span><span class="code-bracket">(</span><span class="code-variable">project</span><span class="code-bracket">)</span>;<span class="code-cursor"></span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEGO Progress -->
+        <div class="lego-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">0 / 5</span>
+            <button class="reset-btn" onclick="resetBricks()" title="Сбросить">↺</button>
+        </div>
+    </section>
+
+    <!-- Completion Message - Minimalist -->
+    <div class="completion-message" id="completionMessage">
+        <p>
+            <span class="completion-human">Так я собираю из ваших идей работающие решения</span>
+            <span class="completion-tech" style="display: none;">build() complete</span>
+        </p>
+        <button onclick="resetBricks()">
+            <span class="reset-human">Собрать заново</span>
+            <span class="reset-tech" style="display: none;">reset()</span>
+        </button>
+    </div>
+
+    <section class="section" id="services">
+        <div class="section-header">
+            <p class="section-label">
+                <span class="label-human">Что я делаю</span>
+                <span class="label-tech" style="display: none;">// services</span>
+            </p>
+            <h2 class="section-title">
+                <span class="services-title-human">Полный цикл создания продукта</span>
+                <span class="services-title-tech" style="display: none;">End-to-end development</span>
+            </h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">R</div>
+                <h3 class="service-title">
+                    <span class="s1-human">Исследование</span>
+                    <span class="s1-tech" style="display: none;">research()</span>
+                </h3>
+                <p class="service-desc">
+                    <span class="s1d-human">Кастдев, глубинные интервью, анализ конкурентов. Нахожу настоящую проблему.</span>
+                    <span class="s1d-tech" style="display: none;">Customer development, user interviews, competitive analysis.</span>
+                </p>
+                <div class="service-tags">
+                    <span class="service-tag human-tag">CustDev</span>
+                    <span class="service-tag human-tag">User Research</span>
+                    <span class="service-tag tech-tag" style="display: none;">JTBD</span>
+                    <span class="service-tag tech-tag" style="display: none;">Analytics</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">D</div>
+                <h3 class="service-title">
+                    <span class="s2-human">Дизайн и UX</span>
+                    <span class="s2-tech" style="display: none;">design()</span>
+                </h3>
+                <p class="service-desc">
+                    <span class="s2d-human">Прототипы, user flow, красивые интерфейсы. Продумываю каждый сценарий.</span>
+                    <span class="s2d-tech" style="display: none;">Figma prototypes, design systems, responsive layouts.</span>
+                </p>
+                <div class="service-tags">
+                    <span class="service-tag human-tag">Figma</span>
+                    <span class="service-tag human-tag">Прототипы</span>
+                    <span class="service-tag tech-tag" style="display: none;">Figma API</span>
+                    <span class="service-tag tech-tag" style="display: none;">Design tokens</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">B</div>
+                <h3 class="service-title">
+                    <span class="s3-human">Разработка</span>
+                    <span class="s3-tech" style="display: none;">build()</span>
+                </h3>
+                <p class="service-desc">
+                    <span class="s3d-human">Сайты, веб-приложения, чат-боты, интеграции. Пишу код сама.</span>
+                    <span class="s3d-tech" style="display: none;">React, Next.js, Node.js, Python. API development.</span>
+                </p>
+                <div class="service-tags">
+                    <span class="service-tag human-tag">Сайты</span>
+                    <span class="service-tag human-tag">Боты</span>
+                    <span class="service-tag tech-tag" style="display: none;">TypeScript</span>
+                    <span class="service-tag tech-tag" style="display: none;">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section process-section">
+        <div class="section-header">
+            <p class="section-label" style="color: var(--accent);">
+                <span class="proc-label-human">Процесс</span>
+                <span class="proc-label-tech" style="display: none;">// pipeline</span>
+            </p>
+            <h2 class="section-title">
+                <span class="proc-title-human">Как мы будем работать</span>
+                <span class="proc-title-tech" style="display: none;">Development workflow</span>
+            </h2>
+        </div>
+
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="process-number">01</div>
+                <h3 class="process-title">
+                    <span class="p1-human">Знакомство</span>
+                    <span class="p1-tech" style="display: none;">init()</span>
+                </h3>
+                <p class="process-desc">
+                    <span class="p1d-human">Созвон, обсуждение задачи, цели и бюджет</span>
+                    <span class="p1d-tech" style="display: none;">Requirements, scope, stack</span>
+                </p>
+            </div>
+
+            <div class="process-step">
+                <div class="process-number">02</div>
+                <h3 class="process-title">
+                    <span class="p2-human">Исследование</span>
+                    <span class="p2-tech" style="display: none;">analyze()</span>
+                </h3>
+                <p class="process-desc">
+                    <span class="p2d-human">Анализ аудитории и конкурентов</span>
+                    <span class="p2d-tech" style="display: none;">Research, validation</span>
+                </p>
+            </div>
+
+            <div class="process-step">
+                <div class="process-number">03</div>
+                <h3 class="process-title">
+                    <span class="p3-human">Создание</span>
+                    <span class="p3-tech" style="display: none;">build()</span>
+                </h3>
+                <p class="process-desc">
+                    <span class="p3d-human">Дизайн, разработка, тестирование</span>
+                    <span class="p3d-tech" style="display: none;">Sprints, CI/CD, QA</span>
+                </p>
+            </div>
+
+            <div class="process-step">
+                <div class="process-number">04</div>
+                <h3 class="process-title">
+                    <span class="p4-human">Запуск</span>
+                    <span class="p4-tech" style="display: none;">deploy()</span>
+                </h3>
+                <p class="process-desc">
+                    <span class="p4d-human">Публикация и поддержка</span>
+                    <span class="p4d-tech" style="display: none;">Production, monitoring</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section" id="contact">
+        <h2 class="section-title">
+            <span class="cta-title-human">Давайте создадим<br>что-то крутое</span>
+            <span class="cta-title-tech" style="display: none;">Ready to<br>deploy()</span>
+        </h2>
+        <p class="cta-subtitle">
+            <span class="cta-sub-human">Есть идея? Расскажите — обсудим, как воплотить.</span>
+            <span class="cta-sub-tech" style="display: none;">// Let's build something production-ready</span>
+        </p>
+        <a href="mailto:hello@papina.team" class="btn btn-primary">
+            <span class="cta-btn-human">Написать мне</span>
+            <span class="cta-btn-tech" style="display: none;">git push</span>
+        </a>
+    </section>
+
+    <footer>
+        <p class="footer-text">
+            <span class="footer-human">© 2026 PAPINA. Все права защищены.</span>
+            <span class="footer-tech" style="display: none;">© 2026 PAPINA // MIT License</span>
+        </p>
+        <div class="footer-links">
+            <a href="https://t.me/papina" class="footer-link">Telegram</a>
+            <a href="https://linkedin.com/in/papina" class="footer-link">LinkedIn</a>
+            <a href="https://github.com/papina" class="footer-link github-link" style="display: none;">GitHub</a>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // LEGO PLATFORM
+        // ==========================================
+        const studGrid = document.getElementById('studGrid');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const legoProgress = document.querySelector('.lego-progress');
+        const completionMessage = document.getElementById('completionMessage');
+        const hero = document.querySelector('.hero');
+        const letterPContainer = document.getElementById('letterPContainer');
+
+        // Generate stud grid
+        function generateStuds() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const studSize = 50;
+            const cols = Math.ceil(w / studSize);
+            const rows = Math.ceil(h / studSize);
+            
+            studGrid.style.setProperty('--cols', cols);
+            studGrid.style.setProperty('--rows', rows);
+            studGrid.innerHTML = '';
+            
+            for (let i = 0; i < cols * rows; i++) {
+                const stud = document.createElement('div');
+                stud.className = 'stud';
+                studGrid.appendChild(stud);
+            }
+        }
+        generateStuds();
+        window.addEventListener('resize', generateStuds);
+
+        // Bricks configuration - Letter P (5 bricks)
+        // Grid: CELL = 45px, Letter size: 6 cols x 8 rows = 270px x 360px
+        // Coordinates relative to .letter-p-container (0, 0 = top-left)
+        //
+        // Grid layout:
+        // Cols:  0  1  2  3  4  5
+        // Row 0: #  #  #  #  #  #
+        // Row 1: #  #  #  #  #  #
+        // Row 2: #  #  .  .  #  #  <- HOLE in cols 2-3
+        // Row 3: #  #  .  .  #  #  <- HOLE in cols 2-3
+        // Row 4: #  #  #  #  #  #
+        // Row 5: #  #  #  #  #  #
+        // Row 6: #  #
+        // Row 7: #  #
+        //
+        const CELL = 45;
+        const bricksData = [
+            // Block 1: Top of left bar (2x4 vertical) - cols 0-1, rows 0-3
+            { id: 1, type: '2x4', targetX: '0px', targetY: '0px' },
+
+            // Block 2: Bottom of left bar (2x4 vertical) - cols 0-1, rows 4-7
+            { id: 2, type: '2x4', targetX: '0px', targetY: '180px' },
+
+            // Block 3: Top of loop (4x2 horizontal) - cols 2-5, rows 0-1
+            { id: 3, type: '4x2', targetX: '90px', targetY: '0px' },
+
+            // Block 4: Right side of loop (2x2 square) - cols 4-5, rows 2-3
+            { id: 4, type: '2x2', targetX: '180px', targetY: '90px' },
+
+            // Block 5: Bottom of loop (4x2 horizontal) - cols 2-5, rows 4-5
+            { id: 5, type: '4x2', targetX: '90px', targetY: '180px' },
+        ];
+
+        // Scattered positions - 5 bricks
+        // Coordinates relative to letterPContainer center (135px, 180px from top-left)
+        // Kept within visible area to prevent overflow
+        const scatterPositions = [
+            { x: '-80px', y: '-120px', rot: -12 },    // Top left
+            { x: '180px', y: '-130px', rot: 18 },     // Top right
+            { x: '200px', y: '40px', rot: -8 },       // Middle right
+            { x: '-90px', y: '200px', rot: 15 },      // Bottom left
+            { x: '190px', y: '220px', rot: -20 },     // Bottom right
+        ];
+
+        let bricks = [];
+        let ghosts = [];
+        let placedCount = 0;
+        const totalBricks = 5; // Changed from 6 to 5 bricks
+
+        // Create ghost targets
+        function createGhost(data) {
+            const ghost = document.createElement('div');
+            ghost.className = 'target-ghost';
+
+            const sizes = {
+                '2x2': { w: 90, h: 90 },
+                '2x3': { w: 90, h: 135 },
+                '2x4': { w: 90, h: 180 },
+                '4x2': { w: 180, h: 90 },
+            };
+
+            const size = sizes[data.type];
+            ghost.style.width = size.w + 'px';
+            ghost.style.height = size.h + 'px';
+            ghost.style.left = data.targetX;
+            ghost.style.top = data.targetY;
+            ghost.dataset.id = data.id;
+
+            letterPContainer.appendChild(ghost);
+            return ghost;
+        }
+
+        // Create brick
+        function createBrick(data, index) {
+            const brick = document.createElement('div');
+            brick.className = `lego-brick brick-${data.type}`;
+            brick.dataset.id = data.id;
+
+            const studsDiv = document.createElement('div');
+            studsDiv.className = 'brick-studs';
+
+            const studCounts = { '2x2': 4, '2x3': 6, '2x4': 8, '4x2': 8 }; // 2x4 has 8 studs, 4x2 has 8 studs
+            for (let i = 0; i < studCounts[data.type]; i++) {
+                const stud = document.createElement('div');
+                stud.className = 'brick-stud';
+                studsDiv.appendChild(stud);
+            }
+            brick.appendChild(studsDiv);
+
+            const scatter = scatterPositions[index];
+            // Position relative to container center (135px, 180px)
+            const centerX = 135;
+            const centerY = 180;
+            const scatterX = centerX + parseInt(scatter.x);
+            const scatterY = centerY + parseInt(scatter.y);
+
+            brick.style.left = scatterX + 'px';
+            brick.style.top = scatterY + 'px';
+            brick.style.setProperty('--rot', scatter.rot + 'deg');
+            brick.style.transform = `rotate(${scatter.rot}deg)`;
+
+            brick.brickData = data;
+            brick.scatterPos = scatter;
+
+            brick.addEventListener('click', () => placeBrick(brick));
+            brick.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                placeBrick(brick);
+            });
+
+            letterPContainer.appendChild(brick);
+
+            console.log(`Created brick ${data.id} at scatter position:`, scatter);
+
+            return brick;
+        }
+
+        // Place brick
+        function placeBrick(brick) {
+            if (brick.classList.contains('placed')) return;
+
+            const data = brick.brickData;
+
+            // Debug: log brick placement
+            console.log(`Placing brick ${data.id} (${data.type}):`, {
+                targetX: data.targetX,
+                targetY: data.targetY,
+                actualX: brick.getBoundingClientRect().left,
+                actualY: brick.getBoundingClientRect().top
+            });
+
+            brick.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            brick.style.left = data.targetX;
+            brick.style.top = data.targetY;
+            brick.style.transform = 'rotate(0deg)';
+            brick.style.setProperty('--rot', '0deg');
+
+            brick.style.boxShadow = `
+                0 3px 0 #D4D4D4,
+                0 5px 15px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,1)
+            `;
+
+            const ghost = ghosts.find(g => g.dataset.id == data.id);
+            if (ghost) ghost.classList.add('filled');
+
+            setTimeout(() => {
+                brick.classList.add('placed');
+                placedCount++;
+                updateProgress();
+
+                if (placedCount === totalBricks) {
+                    setTimeout(() => {
+                        // Hide progress bar and show completion message
+                        legoProgress.classList.add('completed');
+                        completionMessage.classList.add('show');
+                        console.log('Letter P completed!');
+                    }, 800); // Show message after 0.8s
+                }
+            }, 500);
+        }
+
+        function updateProgress() {
+            const percent = (placedCount / totalBricks) * 100;
+            progressFill.style.width = percent + '%';
+            progressText.textContent = `${placedCount} / ${totalBricks}`;
+        }
+
+        function resetBricks() {
+            // Hide completion message and show progress bar again
+            completionMessage.classList.remove('show');
+            legoProgress.classList.remove('completed');
+
+            placedCount = 0;
+            updateProgress();
+
+            ghosts.forEach(g => g.classList.remove('filled'));
+
+            bricks.forEach((brick, index) => {
+                brick.classList.remove('placed');
+                const scatter = scatterPositions[index];
+
+                setTimeout(() => {
+                    brick.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+                    // Position relative to container center
+                    const centerX = 135;
+                    const centerY = 180;
+                    const scatterX = centerX + parseInt(scatter.x);
+                    const scatterY = centerY + parseInt(scatter.y);
+
+                    brick.style.left = scatterX + 'px';
+                    brick.style.top = scatterY + 'px';
+                    brick.style.transform = `rotate(${scatter.rot}deg)`;
+                    brick.style.setProperty('--rot', scatter.rot + 'deg');
+                    brick.style.boxShadow = `
+                        0 6px 0 #D4D4D4,
+                        0 8px 20px rgba(0,0,0,0.3),
+                        inset 0 1px 0 rgba(255,255,255,1)
+                    `;
+                }, index * 80);
+            });
+        }
+
+        // Init LEGO
+        function initLego() {
+            console.log('=== INITIALIZING LEGO P GAME ===');
+            console.log('Brick configuration:', bricksData);
+
+            bricksData.forEach((data, i) => {
+                ghosts.push(createGhost(data));
+                bricks.push(createBrick(data, i));
+            });
+
+            console.log(`Created ${bricks.length} bricks and ${ghosts.length} ghost targets (total: ${totalBricks})`);
+
+            // Debug: Show letter P structure
+            setTimeout(() => {
+                console.log('=== LETTER P STRUCTURE ===');
+                console.log('Brick positions (target):');
+                bricksData.forEach(b => {
+                    console.log(`  Brick ${b.id} (${b.type}): ${b.targetX}, ${b.targetY}`);
+                });
+                console.log('Brick sizes: 2x4=90x180, 4x2=180x90, 2x2=90x90');
+                console.log('Grid: CELL=45px, Total size: 270px wide x 360px tall');
+                console.log('Expected layout (5 bricks):');
+                console.log('[1] [3333]    <- Row 0-1: Left bar top + Loop top');
+                console.log('[1]   [4]     <- Row 2-3: Left bar top + HOLE + Right wall');
+                console.log('[2] [5555]    <- Row 4-5: Left bar bot + Loop bottom');
+                console.log('[2]           <- Row 6-7: Left bar bot continues');
+                console.log('');
+                console.log('HOLE is in cols 2-3, rows 2-3 (empty space inside loop)');
+            }, 100);
+        }
+        initLego();
+
+        // ==========================================
+        // MATRIX RAIN (Tech Mode)
+        // ==========================================
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+
+        const chars = '01アイウエオカキクケコ<>{}[]();:=+-*/PAPINA.';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = [];
+
+        function initDrops() {
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
+        }
+        initDrops();
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(13, 13, 13, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < drops.length; i++) {
+                const char = charArray[Math.floor(Math.random() * charArray.length)];
+                
+                const brightness = Math.random();
+                if (brightness > 0.95) {
+                    ctx.fillStyle = '#FFFFFF';
+                } else if (brightness > 0.8) {
+                    ctx.fillStyle = '#FF6B35';
+                } else {
+                    ctx.fillStyle = `rgba(255, 77, 0, ${0.3 + Math.random() * 0.4})`;
+                }
+                
+                ctx.font = `${fontSize}px JetBrains Mono`;
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
+                    drops[i] = 0;
+                }
+                drops[i] += 0.5 + Math.random() * 0.5;
+            }
+        }
+
+        let matrixInterval;
+
+        // ==========================================
+        // MODE SWITCHER
+        // ==========================================
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        const body = document.body;
+
+        function switchMode(mode) {
+            modeBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+
+            if (mode === 'tech') {
+                body.classList.add('tech-mode');
+                if (!matrixInterval) {
+                    matrixInterval = setInterval(drawMatrix, 45);
+                }
+            } else {
+                body.classList.remove('tech-mode');
+                if (matrixInterval) {
+                    clearInterval(matrixInterval);
+                    matrixInterval = null;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            // Toggle content
+            document.querySelectorAll('[class*="human"]').forEach(el => {
+                if (el.classList.contains('lego-brick') || el.classList.contains('human-visual') || el.classList.contains('human-tag')) {
+                    // Handled by CSS
+                } else if (el.className.includes('-human')) {
+                    el.style.display = mode === 'human' ? '' : 'none';
+                }
+            });
+
+            document.querySelectorAll('[class*="tech"]').forEach(el => {
+                if (el.classList.contains('tech-visual') || el.classList.contains('tech-tag')) {
+                    // Handled by CSS
+                } else if (el.className.includes('-tech') && !el.classList.contains('mode-switcher')) {
+                    el.style.display = mode === 'tech' ? '' : 'none';
+                }
+            });
+
+            const githubLink = document.querySelector('.github-link');
+            if (githubLink) {
+                githubLink.style.display = mode === 'tech' ? '' : 'none';
+            }
+
+            // Toggle completion message text
+            document.querySelectorAll('.completion-human, .reset-human').forEach(el => {
+                el.style.display = mode === 'human' ? '' : 'none';
+            });
+            document.querySelectorAll('.completion-tech, .reset-tech').forEach(el => {
+                el.style.display = mode === 'tech' ? '' : 'none';
+            });
+        }
+
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => switchMode(btn.dataset.mode));
+        });
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initDrops();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
