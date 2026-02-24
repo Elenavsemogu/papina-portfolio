@@ -1,0 +1,13 @@
+<svg width="32" height="32" viewBox="0 0 144 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#FF6B35"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="128" height="128" rx="32" fill="url(#g)"/>
+  <text x="72" y="98" font-family="Arial Black, sans-serif" font-size="82" font-weight="900" fill="white" text-anchor="middle">П</text>
+  <circle cx="128" cy="16" r="16" fill="#FF4D00" stroke="#F5F3EF" stroke-width="6">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+</svg>

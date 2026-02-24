@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Брендбук ПАПИНА.КОНСТРУКТОРСКАЯ — Гайд для партнёров</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F5F3EF;
+            --text: #1A1A1A;
+            --accent: #FF4D00;
+            --accent-light: #FF6B35;
+            --muted: #8A8A8A;
+            --card-bg: #FFFFFF;
+            --border: rgba(26, 26, 26, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 32px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            text-align: center;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        h1 .h1-main {
+            font-family: 'Dela Gothic One', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            display: block;
+            position: relative;
+        }
+
+        h1 .h1-dot {
+            position: absolute;
+            right: -12px;
+            bottom: 4px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2.5s infinite;
+        }
+
+        h1 .h1-sub {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        /* Цвета */
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .color-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card-bg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .color-swatch {
+            height: 100px;
+        }
+
+        .color-info {
+            padding: 16px;
+        }
+
+        .color-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .color-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* Лого */
+        .logo-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            margin-bottom: 32px;
+        }
+
+        .logo-bg-light {
+            background: #FFFFFF;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .logo-bg-dark {
+            background: #0D0D0D;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .logo-form-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .logo-bg-dark .logo-form-label {
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* Иконка */
+        .brand-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Dela Gothic One', sans-serif;
+            font-size: 64px;
+            color: white;
+            position: relative;
+        }
+
+        .brand-icon .dot {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid #FFFFFF;
+            animation: pulse 2.5s infinite;
+        }
+
+        .logo-bg-dark .brand-icon .dot {
+            border-color: #0D0D0D;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.2); }
+        }
+
+        /* Полный лого */
+        .brand-full {
+            text-align: center;
+            line-height: 1;
+        }
+
+        .brand-full .name-line {
+            font-family: 'Dela Gothic One', sans-serif;
+            font-size: 40px;
+            display: block;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .brand-full .name-line.dark { color: var(--text); }
+        .brand-full .name-line.light { color: white; }
+
+        .brand-full .bdot {
+            position: absolute;
+            right: -10px;
+            bottom: 4px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2.5s infinite;
+        }
+
+        .brand-full .sub-line {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .brand-full .sub-line.dark { color: var(--muted); }
+        .brand-full .sub-line.light { color: rgba(255,255,255,0.45); }
+
+        /* Правила */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .rule-card h4 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .rule-card p, .rule-card li {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .rule-card ul {
+            padding-left: 20px;
+        }
+
+        /* Шрифты */
+        .font-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .font-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .font-sample {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .font-usage {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* Загрузки */
+        .downloads {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .download-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .download-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .download-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 77, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .download-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .download-size {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Описание точки */
+        .dot-explanation {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border-left: 4px solid var(--accent);
+        }
+
+        .dot-explanation h4 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .dot-explanation p {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-showcase, .rules-grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>
+            <span class="h1-main">ПАПИНА<span class="h1-dot"></span></span>
+            <span class="h1-sub">КОНСТРУКТОРСКАЯ</span>
+        </h1>
+        <p class="subtitle">Брендбук для партнёров</p>
+    </header>
+
+    <!-- ЛОГОТИП -->
+    <div class="section">
+        <h2>Логотип</h2>
+
+        <div class="logo-showcase">
+            <div class="logo-bg-light">
+                <div>
+                    <div class="logo-form-label">Форма А — Иконка</div>
+                    <div style="margin-top: 16px; display: flex; justify-content: center;">
+                        <div class="brand-icon">
+                            П
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="logo-form-label">Форма Б — Полный логотип</div>
+                    <div style="margin-top: 16px;">
+                        <div class="brand-full">
+                            <span class="name-line dark">ПАПИНА<span class="bdot"></span></span>
+                            <span class="sub-line dark">КОНСТРУКТОРСКАЯ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="logo-bg-dark">
+                <div>
+                    <div class="logo-form-label">Форма А — Иконка</div>
+                    <div style="margin-top: 16px; display: flex; justify-content: center;">
+                        <div class="brand-icon">
+                            П
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="logo-form-label">Форма Б — Полный логотип</div>
+                    <div style="margin-top: 16px;">
+                        <div class="brand-full">
+                            <span class="name-line light">ПАПИНА<span class="bdot"></span></span>
+                            <span class="sub-line light">КОНСТРУКТОРСКАЯ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dot-explanation">
+            <h4>Логика пульсирующей точки</h4>
+            <p>
+                <strong>Форма А (иконка):</strong> Точка находится на правом верхнем углу квадрата. Она пульсирует — это знак активности, «мы онлайн, мы работаем». Используется как favicon, аватар, иконка приложения.
+            </p>
+            <br>
+            <p>
+                <strong>Форма Б (полный логотип):</strong> Надпись «ПАПИНА» с пульсирующей точкой на уровне baseline, под ней — «КОНСТРУКТОРСКАЯ» мелким капсом с разрядкой. Точка говорит: «история продолжается, мы работаем».
+            </p>
+        </div>
+    </div>
+
+    <!-- ЦВЕТА -->
+    <div class="section">
+        <h2>Цвета бренда</h2>
+        <div class="colors-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background: #FF4D00;"></div>
+                <div class="color-info">
+                    <div class="color-name">Primary Orange</div>
+                    <div class="color-value">#FF4D00 / rgb(255, 77, 0)</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #FF6B35;"></div>
+                <div class="color-info">
+                    <div class="color-name">Accent Orange</div>
+                    <div class="color-value">#FF6B35 / rgb(255, 107, 53)</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #F5F3EF;"></div>
+                <div class="color-info">
+                    <div class="color-name">Background Light</div>
+                    <div class="color-value">#F5F3EF / rgb(245, 243, 239)</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #1A1A1A;"></div>
+                <div class="color-info">
+                    <div class="color-name">Text Dark</div>
+                    <div class="color-value">#1A1A1A / rgb(26, 26, 26)</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #8A8A8A;"></div>
+                <div class="color-info">
+                    <div class="color-name">Muted</div>
+                    <div class="color-value">#8A8A8A / rgb(138, 138, 138)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ШРИФТЫ -->
+    <div class="section">
+        <h2>Типографика</h2>
+
+        <div class="font-card">
+            <div class="font-name">Dela Gothic One</div>
+            <div class="font-sample" style="font-family: 'Dela Gothic One', sans-serif;">ПАПИНА АБВГД</div>
+            <div class="font-usage">Логотип и навигация. Тяжёлый, запоминающийся шрифт с характером. Один вес (400).</div>
+        </div>
+
+        <div class="font-card">
+            <div class="font-name">Manrope</div>
+            <div class="font-sample" style="font-family: 'Manrope', sans-serif; font-weight: 800;">Заголовки секций</div>
+            <div class="font-usage">Заголовки h2, h3, карточки. Геометричный, чистый. Веса: 600, 700, 800.</div>
+        </div>
+
+        <div class="font-card">
+            <div class="font-name">Inter</div>
+            <div class="font-sample" style="font-family: 'Inter', sans-serif; font-weight: 500;">Основной текст на сайте</div>
+            <div class="font-usage">Body, описания, формы, кнопки. Универсальный, как у Figma и Notion. Веса: 400–900.</div>
+        </div>
+
+        <div class="font-card">
+            <div class="font-name">JetBrains Mono</div>
+            <div class="font-sample" style="font-family: 'JetBrains Mono', monospace; font-weight: 500;">const result = 'code';</div>
+            <div class="font-usage">Технический контент, моноширинный текст, код. Веса: 400–700.</div>
+        </div>
+    </div>
+
+    <!-- ПРАВИЛА ИСПОЛЬЗОВАНИЯ -->
+    <div class="section">
+        <h2>Правила использования</h2>
+        <div class="rules-grid">
+            <div class="rule-card">
+                <h4>Минимальные размеры</h4>
+                <ul>
+                    <li>Иконка (Форма А): не менее 32×32 px</li>
+                    <li>Полный логотип (Форма Б): не менее 120 px по ширине</li>
+                    <li>Favicon: 32×32 px (SVG)</li>
+                </ul>
+            </div>
+            <div class="rule-card">
+                <h4>Безопасная зона</h4>
+                <p>Вокруг логотипа всегда оставлять отступ не менее высоты буквы «П» в иконке. Ни один элемент не должен заходить в эту зону.</p>
+            </div>
+            <div class="rule-card">
+                <h4>Допустимо</h4>
+                <ul>
+                    <li>Использовать на белом/бежевом фоне</li>
+                    <li>Использовать на чёрном/тёмном фоне</li>
+                    <li>Размещать на фото с достаточным контрастом</li>
+                    <li>Масштабировать пропорционально</li>
+                </ul>
+            </div>
+            <div class="rule-card">
+                <h4>Запрещено</h4>
+                <ul>
+                    <li>Растягивать непропорционально</li>
+                    <li>Менять цвета градиента</li>
+                    <li>Убирать пульсирующую точку</li>
+                    <li>Менять шрифт логотипа</li>
+                    <li>Размещать на пёстром фоне без подложки</li>
+                    <li>Добавлять обводку или тень</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- СКАЧАТЬ -->
+    <div class="section">
+        <h2>Скачать файлы</h2>
+        <div class="downloads">
+            <a class="download-card" href="papina-icon.svg" download>
+                <div class="download-icon">П</div>
+                <div>
+                    <div class="download-name">Иконка (Форма А)</div>
+                    <div class="download-size">SVG, с анимацией точки</div>
+                </div>
+            </a>
+            <a class="download-card" href="papina-full-light.svg" download>
+                <div class="download-icon">Б</div>
+                <div>
+                    <div class="download-name">Полный, светлый фон</div>
+                    <div class="download-size">SVG, Forma Б</div>
+                </div>
+            </a>
+            <a class="download-card" href="papina-full-dark.svg" download>
+                <div class="download-icon">Б</div>
+                <div>
+                    <div class="download-name">Полный, тёмный фон</div>
+                    <div class="download-size">SVG, Forma Б</div>
+                </div>
+            </a>
+            <a class="download-card" href="favicon.svg" download>
+                <div class="download-icon">F</div>
+                <div>
+                    <div class="download-name">Favicon</div>
+                    <div class="download-size">SVG, 32×32</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- КОНТАКТ -->
+    <div style="text-align: center; padding: 60px 0 20px; border-top: 1px solid var(--border);">
+        <p style="font-size: 14px; color: var(--muted);">
+            По вопросам использования логотипа: <a href="mailto:hello@papina.team" style="color: var(--accent); font-weight: 600; text-decoration: none;">hello@papina.team</a>
+        </p>
+        <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">
+            © 2026 ПАПИНА.КОНСТРУКТОРСКАЯ
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>

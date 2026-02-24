@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAPINA. — Full-stack Product Manager</title>
+    <title>ПАПИНА.КОНСТРУКТОРСКАЯ — Редизайн и модернизация сайтов | Барнаул, Новосибирск</title>
+    <meta name="description" content="Конструкторская по модернизации сайтов. Переделаем устаревший сайт за 14 дней: загрузка в 4 раза быстрее, конверсия выше на 200%. Барнаул, Новосибирск, вся Россия.">
+    <meta name="keywords" content="редизайн сайта барнаул, обновить сайт новосибирск, переделать сайт, модернизация сайта, оптимизация сайта, ускорить сайт">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://papina.team/">
+    <meta property="og:title" content="ПАПИНА.КОНСТРУКТОРСКАЯ — Редизайн и модернизация сайтов">
+    <meta property="og:description" content="Конструкторская по модернизации сайтов. Переделаем за 14 дней. Загрузка 4x быстрее, конверсия +200%.">
+    <meta property="og:image" content="https://papina.team/papina-full-light.svg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://papina.team/">
+    <meta property="twitter:title" content="ПАПИНА.КОНСТРУКТОРСКАЯ — Редизайн и модернизация сайтов">
+    <meta property="twitter:description" content="Конструкторская по модернизации сайтов. Переделаем за 14 дней. Загрузка 4x быстрее, конверсия +200%.">
+    <meta property="twitter:image" content="https://papina.team/papina-full-light.svg">
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #F5F3EF;
@@ -43,7 +61,7 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.5;
@@ -97,8 +115,8 @@
             right: 20px;
             z-index: 1000;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            align-items: flex-start;
             background: transparent;
             padding: 0;
             backdrop-filter: none;
@@ -106,52 +124,51 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 10px 20px 10px 10px;
-            border-radius: 100px;
+            padding: 14px 28px 12px;
+            border-radius: 16px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
             transition: all 0.6s ease;
         }
 
-        .tech-mode .logo {
-            background: rgba(13, 13, 13, 0.95);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 77, 0, 0.2);
+
+        .logo-name-group {
+            line-height: 1;
+            text-align: center;
         }
 
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Unbounded', cursive;
-            font-size: 24px;
-            font-weight: 900;
-            color: white;
+        .logo-main-line {
+            display: block;
             position: relative;
+        }
+
+        .logo-letter {
+            font-family: 'Dela Gothic One', sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--accent);
+            transition: all 0.6s ease;
+            display: none;
+        }
+
+        .logo-fullname {
+            font-family: 'Dela Gothic One', sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--text);
             transition: all 0.6s ease;
         }
 
-        .tech-mode .logo-icon {
-            box-shadow: 0 0 30px rgba(255, 77, 0, 0.4);
-        }
-
-        .logo-dot {
+        .logo-dot-inline {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 12px;
-            height: 12px;
+            right: -10px;
+            bottom: 3px;
+            width: 5px;
+            height: 5px;
             background: var(--accent);
             border-radius: 50%;
-            border: 3px solid var(--bg);
             animation: pulse 2.5s ease-in-out infinite;
-            transition: border-color 0.6s ease;
         }
 
         @keyframes pulse {
@@ -159,22 +176,38 @@
             50% { transform: scale(1.1); box-shadow: 0 0 15px 5px var(--accent-glow); }
         }
 
-        .logo-text {
-            font-family: 'Unbounded', cursive;
-            font-weight: 800;
-            font-size: 20px;
-            letter-spacing: -0.5px;
+        .logo-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2.2px;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
             transition: all 0.6s ease;
         }
 
-        /* Mobile: hide logo text, only show icon */
+        /* Mobile */
         @media (max-width: 768px) {
-            .logo-text {
+            .logo-fullname {
                 display: none;
+            }
+            .logo-letter {
+                display: inline;
+            }
+            .logo-subtext {
+                display: none;
+            }
+            .logo-dot-inline {
+                position: static;
+                display: inline-block;
+                margin-left: 2px;
+                vertical-align: baseline;
             }
 
             .logo {
-                padding: 10px;
+                padding: 10px 16px;
             }
 
             nav {
@@ -187,72 +220,13 @@
                 padding: 12px 20px;
                 font-size: 13px;
             }
-
-            /* Mode switcher fixed at bottom center */
-            .mode-switcher {
-                position: fixed;
-                bottom: 24px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 1001;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            }
         }
 
-        /* Mode Switcher */
-        .mode-switcher {
-            display: flex;
-            align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            padding: 4px;
-            transition: all 0.6s ease;
-        }
-
-        .tech-mode .mode-switcher {
-            background: rgba(255, 77, 0, 0.05);
-            border-color: rgba(255, 77, 0, 0.2);
-        }
-
-        .mode-btn {
-            padding: 10px 24px;
-            border-radius: 100px;
-            border: none;
-            background: transparent;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mode-btn.active {
-            background: var(--text);
-            color: var(--bg);
-        }
-
-        .tech-mode .mode-btn {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-        }
-
-        .tech-mode .mode-btn.active {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 0 25px rgba(255, 77, 0, 0.5);
-        }
-
-        .mode-btn svg {
-            width: 16px;
-            height: 16px;
-        }
 
         .nav-right {
+            position: absolute;
+            right: 0;
+            top: 0;
             display: flex;
             align-items: center;
             gap: 16px;
@@ -289,29 +263,204 @@
             box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
         }
 
-        .tech-mode .nav-link.cta {
-            background: rgba(255, 77, 0, 0.95);
-            color: white;
-            box-shadow: 0 4px 24px rgba(255, 77, 0, 0.3);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-        }
 
         /* ==========================================
-           HERO SECTION - LEGO PLATFORM
+           HERO SECTION - BEFORE/AFTER CASE
            ========================================== */
         .hero {
             min-height: 100vh;
             position: relative;
-            overflow: hidden; /* Prevent bricks from going outside viewport */
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 80px;
+            padding: 120px 80px 80px;
+            background: var(--bg);
         }
 
-        /* LEGO Platform Background - Human Mode */
-        .lego-world {
+        /* До/После кейс */
+        .case-before-after {
+            flex: 1;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: 48px;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .tech-mode .case-before-after {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .case-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.2);
+        }
+
+        .case-image {
             position: absolute;
             inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .before-image {
+            clip-path: inset(0 50% 0 0);
+            transition: clip-path 0.3s ease;
+        }
+
+        .after-image {
+            clip-path: inset(0 0 0 50%);
+            transition: clip-path 0.3s ease;
+        }
+
+        .case-mockup {
+            width: 90%;
+            height: 90%;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .mockup-header {
+            background: #f5f5f5;
+            padding: 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mockup-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .mockup-dots span:nth-child(1) { background: #FF5F57; }
+        .mockup-dots span:nth-child(2) { background: #FFBD2E; }
+        .mockup-dots span:nth-child(3) { background: #28CA41; }
+
+        .mockup-content {
+            padding: 24px;
+            height: calc(100% - 50px);
+            overflow: hidden;
+        }
+
+        .mockup-content h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .old-design {
+            background: #fafafa;
+        }
+
+        .new-design {
+            background: white;
+        }
+
+        .case-label {
+            position: absolute;
+            top: 20px;
+            padding: 8px 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-family: 'Manrope', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 100px;
+            z-index: 10;
+        }
+
+        .before-label {
+            left: 20px;
+        }
+
+        .after-label {
+            right: 20px;
+        }
+
+        .case-slider {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(100% - 40px);
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            outline: none;
+            z-index: 20;
+            cursor: ew-resize;
+        }
+
+        .case-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            cursor: ew-resize;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .case-slider::-moz-range-thumb {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            cursor: ew-resize;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        .case-slider-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: var(--accent);
+            pointer-events: none;
+            z-index: 15;
+            box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
+        }
+
+        /* ==========================================
+           LEGO ANTISTRESS SECTION
+           ========================================== */
+        .lego-antistress-section {
+            background: var(--bg);
+            overflow: hidden;
+        }
+
+        .lego-game-wrapper {
+            position: relative;
             width: 100%;
-            height: 100%;
+            height: 600px;
+            margin: 48px auto;
+            max-width: 1200px;
+            border-radius: 24px;
+            overflow: hidden;
             background: linear-gradient(
                 135deg,
                 #FF5500 0%,
@@ -320,53 +469,15 @@
                 #E84400 75%,
                 #D63D00 100%
             );
-            transition: opacity 0.8s ease;
         }
 
-        .tech-mode .lego-world {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Stud grid */
-        .stud-grid {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(var(--cols), 1fr);
-            grid-template-rows: repeat(var(--rows), 1fr);
-            padding: 10px;
-            gap: 6px;
-        }
-
-        .stud {
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: 
-                radial-gradient(ellipse 60% 40% at 35% 30%, rgba(255,255,255,0.5) 0%, transparent 50%),
-                radial-gradient(ellipse 100% 100% at 50% 50%, #FF5500 0%, #E84400 100%);
-            box-shadow: 
-                inset 0 -4px 8px rgba(0,0,0,0.25),
-                inset 0 2px 4px rgba(255,255,255,0.3),
-                0 2px 4px rgba(0,0,0,0.2);
+        .tech-mode .lego-game-wrapper {
+            background: transparent;
         }
 
         /* Hero content card */
         .hero-card {
-            position: absolute;
-            top: 50%;
-            left: 32px;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.97);
-            padding: 32px;
-            border-radius: 28px;
-            width: 360px;
-            max-width: calc(100vw - 64px);
-            box-shadow:
-                0 32px 80px rgba(0,0,0,0.2),
-                0 0 0 1px rgba(255,255,255,0.5);
+            position: relative;
             z-index: 100;
             transition: all 0.6s ease;
         }
@@ -384,26 +495,27 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: rgba(34, 197, 94, 0.1);
+            background: rgba(255, 77, 0, 0.1);
             border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #22C55E;
-            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 32px;
             transition: all 0.6s ease;
+            border: 1.5px solid rgba(255, 77, 0, 0.2);
         }
 
         .tech-mode .hero-badge {
-            background: rgba(255, 77, 0, 0.1);
+            background: rgba(255, 77, 0, 0.15);
             color: var(--accent);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .badge-dot {
-            width: 8px;
-            height: 8px;
-            background: #22C55E;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
             border-radius: 50%;
             animation: pulse-dot 2s ease-in-out infinite;
         }
@@ -418,12 +530,12 @@
         }
 
         .hero-title {
-            font-family: 'Unbounded', cursive;
-            font-size: 26px;
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(48px, 6vw, 72px);
             font-weight: 900;
-            line-height: 1.2;
-            letter-spacing: -1px;
-            margin-bottom: 14px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 32px;
             color: var(--text);
             transition: all 0.6s ease;
         }
@@ -437,23 +549,29 @@
         }
 
         .hero-subtitle {
-            font-size: 15px;
+            font-size: clamp(18px, 2vw, 24px);
+            line-height: 1.6;
             color: var(--muted);
-            margin-bottom: 28px;
-            line-height: 1.7;
+            margin-bottom: 48px;
+            font-weight: 500;
             transition: all 0.6s ease;
         }
 
         .tech-mode .hero-subtitle {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
+            font-size: clamp(16px, 1.8vw, 20px);
         }
 
         .hero-cta {
             display: flex;
-            flex-wrap: nowrap;
-            gap: 12px;
+            gap: 16px;
             margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-cta .btn {
+            font-size: 18px;
+            padding: 20px 40px;
         }
 
         .btn {
@@ -502,14 +620,14 @@
         }
 
         .hero-hint {
-            font-size: 13px;
-            color: var(--accent);
-            font-weight: 600;
+            font-size: 15px;
+            color: var(--muted);
+            font-weight: 500;
             transition: all 0.6s ease;
         }
 
         .tech-mode .hero-hint {
-            display: none;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Tech mode hero visual */
@@ -606,7 +724,7 @@
         }
 
         /* Letter P Container - for proper scaling */
-        .letter-p-container {
+        .lego-game-wrapper .letter-p-container {
             position: absolute;
             top: 50%;
             left: 72%;
@@ -615,7 +733,25 @@
             height: 360px; /* 8 rows * 45px */
             transition: transform 0.6s ease;
             z-index: 50;
-            overflow: visible; /* Allow scattered bricks to go outside */
+            overflow: visible;
+        }
+
+        /* Mobile: Hero adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                padding: 100px 20px 60px;
+                gap: 32px;
+            }
+
+            .case-before-after {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .lego-game-wrapper {
+                height: 500px;
+            }
         }
 
         /* LEGO Bricks */
@@ -642,9 +778,13 @@
             pointer-events: none;
         }
 
-        .tech-mode .letter-p-container {
+        .tech-mode .lego-game-wrapper .letter-p-container {
             opacity: 0;
             pointer-events: none;
+        }
+
+        .tech-mode .lego-antistress-section {
+            opacity: 0.3;
         }
 
         .brick-studs {
@@ -751,7 +891,7 @@
         }
 
         /* Progress */
-        .lego-progress {
+        .lego-game-wrapper .lego-progress {
             position: absolute;
             bottom: 32px;
             left: 50%;
@@ -767,7 +907,7 @@
             transition: all 0.6s ease;
         }
 
-        .tech-mode .lego-progress {
+        .tech-mode .lego-game-wrapper .lego-progress {
             opacity: 0;
             pointer-events: none;
         }
@@ -816,7 +956,7 @@
         }
 
         /* Completion Message - Stylish Design */
-        .completion-message {
+        .lego-game-wrapper .completion-message {
             position: absolute;
             bottom: 100px;
             left: 50%;
@@ -833,8 +973,8 @@
             pointer-events: auto;
         }
 
-        .completion-message p {
-            font-family: 'Unbounded', cursive;
+        .lego-game-wrapper .completion-message p {
+            font-family: 'Manrope', sans-serif;
             font-size: 18px;
             font-weight: 600;
             color: white;
@@ -843,19 +983,19 @@
             line-height: 1.4;
         }
 
-        .tech-mode .completion-message p {
+        .tech-mode .lego-game-wrapper .completion-message p {
             font-family: 'JetBrains Mono', monospace;
             font-size: 16px;
             text-shadow: 0 0 30px rgba(255, 77, 0, 0.8);
         }
 
-        .completion-message button {
+        .lego-game-wrapper .completion-message button {
             background: transparent;
             color: white;
             border: 2px solid rgba(255, 255, 255, 0.6);
             padding: 12px 24px;
             border-radius: 100px;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -868,7 +1008,7 @@
             transform: translateY(-2px);
         }
 
-        .tech-mode .completion-message button {
+        .tech-mode .lego-game-wrapper .completion-message button {
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
             border-color: rgba(255, 77, 0, 0.8);
@@ -881,7 +1021,7 @@
         }
 
         /* Hide progress when completed */
-        .lego-progress.completed {
+        .lego-game-wrapper .lego-progress.completed {
             opacity: 0;
             pointer-events: none;
         }
@@ -916,7 +1056,7 @@
         }
 
         .section-title {
-            font-family: 'Unbounded', cursive;
+            font-family: 'Manrope', sans-serif;
             font-size: clamp(32px, 4vw, 48px);
             font-weight: 800;
             letter-spacing: -1px;
@@ -985,7 +1125,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Unbounded', cursive;
+            font-family: 'Manrope', sans-serif;
             font-size: 28px;
             font-weight: 800;
             color: white;
@@ -1002,7 +1142,7 @@
         }
 
         .service-title {
-            font-family: 'Unbounded', cursive;
+            font-family: 'Manrope', sans-serif;
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 12px;
@@ -1084,7 +1224,7 @@
         }
 
         .process-number {
-            font-family: 'Unbounded', cursive;
+            font-family: 'Manrope', sans-serif;
             font-size: 64px;
             font-weight: 900;
             color: var(--accent);
@@ -1098,7 +1238,7 @@
         }
 
         .process-title {
-            font-family: 'Unbounded', cursive;
+            font-family: 'Manrope', sans-serif;
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 12px;
@@ -1219,25 +1359,15 @@
         /* TABLET: 768px - 1024px - Side by side layout */
         @media (max-width: 1024px) and (min-width: 769px) {
             .hero {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
+                padding: 100px 32px 60px;
             }
 
-            /* Ensure LEGO world covers entire background */
-            .lego-world {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                width: 100% !important;
-                height: 100% !important;
+            .case-before-after {
+                max-width: 400px;
             }
 
-            .stud-grid {
-                width: 100% !important;
-                height: 100% !important;
+            .lego-game-wrapper {
+                height: 500px;
             }
 
             .hero-card {
@@ -1246,26 +1376,10 @@
                 top: 0;
                 transform: none;
                 width: 45%;
-                max-width: 420px;
-                padding: 32px 28px;
-                margin: 0 0 0 32px;
+                max-width: 380px;
+                padding: 28px 24px;
+                margin: 0;
                 flex-shrink: 0;
-            }
-
-            /* Scale letter P container for tablet - shifted right from card */
-            .letter-p-container {
-                left: 65%;
-                transform: translate(-30%, -50%) scale(0.75);
-            }
-
-            .lego-progress {
-                transform: translateX(-50%) scale(0.85);
-            }
-
-            .completion-message {
-                left: 65%;
-                transform: translateX(-50%);
-                max-width: 300px;
             }
 
             .hero-title {
@@ -1281,43 +1395,23 @@
                 font-size: 13px;
             }
 
-            /* LEGO zone takes remaining space */
-            .lego-world,
-            .stud-grid {
-                width: 55%;
-                margin-left: auto;
-            }
-
-            .lego-brick,
-            .target-ghost {
-                /* Positions relative to right 55% of screen */
-            }
-
-            .lego-progress {
-                bottom: 32px;
-                left: auto;
-                right: 5%;
-                transform: none;
-            }
-
             .tech-visual {
                 right: 5%;
+                transform: translateY(-50%) scale(0.85);
             }
 
             .services-grid {
                 grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
             }
 
             .process-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            nav {
-                padding: 16px 24px;
-            }
-
             .section {
-                padding: 80px 24px;
+                padding: 80px 32px;
             }
         }
 
@@ -1330,28 +1424,19 @@
         /* MOBILE: <= 768px - Vertical layout */
         @media (max-width: 768px) {
             .hero {
-                display: flex;
                 flex-direction: column;
-                justify-content: flex-start;
+                min-height: auto;
+                padding: 100px 16px 40px;
             }
-
-            /* Card at top - compact and limited */
             .hero-card {
                 position: relative;
                 left: 0;
-                right: 0;
                 top: 0;
                 transform: none;
-                width: calc(100% - 32px);
+                width: 100%;
                 max-width: none;
-                max-height: 35vh;
-                margin-top: 120px;
-                margin-left: 16px;
-                margin-right: 16px;
-                margin-bottom: 16px;
+                margin: 0 0 24px 0;
                 padding: 20px;
-                flex-shrink: 0;
-                overflow: hidden;
             }
 
             .hero-title {
@@ -1389,42 +1474,13 @@
                 display: none;
             }
 
-            /* Scale letter P container for mobile - larger for visibility */
-            .letter-p-container {
-                left: 50%;
-                top: 55%;
-                transform: translate(-50%, -50%) scale(0.65);
+            .case-before-after {
+                width: 100%;
+                margin: 0;
             }
 
-            .lego-progress {
-                position: fixed;
-                bottom: 100px;
-                left: 50%;
-                transform: translateX(-50%) scale(0.85);
-                z-index: 100;
-            }
-
-            .completion-message {
-                bottom: 120px;
-                padding: 0 20px;
-            }
-
-            .completion-message p {
-                font-size: 14px;
-            }
-
-            .completion-message button {
-                font-size: 12px;
-                padding: 10px 20px;
-            }
-
-            .mode-switcher {
-                position: fixed;
-                bottom: 24px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 1001;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            .case-container {
+                aspect-ratio: 2/3;
             }
 
             .nav-right .nav-link:not(.cta) {
@@ -1432,28 +1488,33 @@
             }
 
             .section {
-                padding: 80px 24px;
+                padding: 80px 20px;
                 position: relative;
                 z-index: 10;
             }
 
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
             .process-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
 
             footer {
                 flex-direction: column;
                 gap: 24px;
                 text-align: center;
+                padding: 32px 20px;
             }
         }
 
         /* SMALL MOBILE: <= 480px */
         @media (max-width: 480px) {
             .hero-card {
-                margin-top: 70px;
                 padding: 16px;
-                max-height: 32vh;
             }
 
             .hero-title {
@@ -1478,43 +1539,151 @@
                 width: 100%;
             }
 
-            /* Scale letter P container even smaller */
-            .letter-p-container {
-                transform: translate(-50%, -50%) scale(0.4);
+            .case-container {
+                aspect-ratio: 1/1.4;
             }
 
-            .lego-progress {
-                bottom: 85px;
-                padding: 12px 20px;
-                transform: translateX(-50%) scale(0.8);
+            .section {
+                padding: 60px 16px;
             }
 
-            .completion-message {
-                bottom: 105px;
-                padding: 0 16px;
+            .section-title {
+                font-size: 28px;
             }
 
-            .completion-message p {
-                font-size: 13px;
+            .service-card {
+                padding: 28px 24px;
+            }
+        }
+
+        /* ==========================================
+           TRANSITION BLOCK: Baby Crawling Animation
+           ========================================== */
+        .transition-block {
+            position: relative;
+            padding: 120px 20px;
+            text-align: center;
+            overflow: hidden;
+            background: var(--bg);
+            transition: background 0.6s ease;
+        }
+
+        .transition-text {
+            font-family: 'Manrope', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            transition: all 0.6s ease;
+        }
+
+        .tech-mode .transition-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+        }
+
+        /* Footsteps container */
+        .baby-crawler {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Individual footprint animation */
+        .footprint {
+            position: absolute;
+            opacity: 0;
+            animation: footprint-appear 0.6s ease-out forwards;
+        }
+
+        @keyframes footprint-appear {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+
+        /* Неравномерный темп: быстро → пауза → петля → снова быстро */
+        .footprint:nth-child(1) { animation-delay: 0s; }
+        .footprint:nth-child(2) { animation-delay: 0.3s; }
+        .footprint:nth-child(3) { animation-delay: 0.6s; }
+        .footprint:nth-child(4) { animation-delay: 0.9s; }
+        .footprint:nth-child(5) { animation-delay: 1.2s; }
+        .footprint:nth-child(6) { animation-delay: 1.5s; }
+        .footprint:nth-child(7) { animation-delay: 2.3s; } /* ПАУЗА перед петлёй */
+        .footprint:nth-child(8) { animation-delay: 2.7s; }
+        .footprint:nth-child(9) { animation-delay: 3.1s; } /* ПЕТЛЯ */
+        .footprint:nth-child(10) { animation-delay: 3.5s; }
+        .footprint:nth-child(11) { animation-delay: 3.9s; }
+        .footprint:nth-child(12) { animation-delay: 4.3s; }
+        .footprint:nth-child(13) { animation-delay: 4.6s; } /* УСКОРЕНИЕ */
+        .footprint:nth-child(14) { animation-delay: 4.85s; }
+        .footprint:nth-child(15) { animation-delay: 5.1s; }
+        .footprint:nth-child(16) { animation-delay: 5.35s; }
+        .footprint:nth-child(17) { animation-delay: 5.6s; }
+        .footprint:nth-child(18) { animation-delay: 5.85s; }
+
+        /* Restart animation */
+        .baby-crawler {
+            animation: footsteps-restart 7s linear infinite;
+        }
+
+        @keyframes footsteps-restart {
+            0%, 100% { opacity: 1; }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .baby-crawler {
+                animation: none;
+                left: 20px;
+                opacity: 0.3;
             }
 
-            .completion-message button {
-                font-size: 11px;
-                padding: 9px 18px;
+            .baby-crawler svg,
+            .baby-arm-left,
+            .baby-arm-right,
+            .baby-leg-left,
+            .baby-leg-right {
+                animation: none;
+            }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .transition-block {
+                padding: 80px 20px;
             }
 
-            .progress-bar {
-                width: 100px;
+            .transition-text {
+                font-size: 20px;
             }
 
-            .progress-text {
-                font-size: 12px;
-            }
-
-            .reset-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
+            .baby-crawler {
+                width: 80px;
+                height: 80px;
+                bottom: 20px;
             }
         }
     </style>
@@ -1525,28 +1694,14 @@
 
     <nav>
         <div class="logo">
-            <div class="logo-icon">
-                P
-                <span class="logo-dot"></span>
+            <div class="logo-name-group">
+                <div class="logo-main-line">
+                    <span class="logo-letter">П</span>
+                    <span class="logo-fullname">ПАПИНА</span>
+                    <span class="logo-dot-inline"></span>
+                </div>
+                <span class="logo-subtext">КОНСТРУКТОРСКАЯ</span>
             </div>
-            <span class="logo-text">PAPINA</span>
-        </div>
-
-        <div class="mode-switcher">
-            <button class="mode-btn active" data-mode="human">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
-                Human
-            </button>
-            <button class="mode-btn" data-mode="tech">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="16 18 22 12 16 6"/>
-                    <polyline points="8 6 2 12 8 18"/>
-                </svg>
-                Tech
-            </button>
         </div>
 
         <div class="nav-right">
@@ -1556,42 +1711,90 @@
     </nav>
 
     <section class="hero">
-        <!-- LEGO World Background -->
-        <div class="lego-world">
-            <div class="stud-grid" id="studGrid"></div>
-        </div>
-
-        <!-- Letter P Container - all bricks and ghosts go here -->
-        <div class="letter-p-container" id="letterPContainer"></div>
-
-        <!-- Hero Content Card -->
+        <!-- Hero Content -->
         <div class="hero-card">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                <span class="badge-text-human">Открыта к проектам</span>
-                <span class="badge-text-tech" style="display: none;">status: available</span>
+                Барнаул • Новосибирск • Онлайн
             </div>
             <h1 class="hero-title">
-                <span class="title-human">Вы приходите с идеей — уходите с <span class="accent">продуктом</span></span>
-                <span class="title-tech" style="display: none;">from <span class="accent">concept</span><br>to production</span>
+                Ваш сайт<br>
+                <span class="accent">теряет 100к/мес</span><br>
+                из-за медленной<br>
+                загрузки?
             </h1>
             <p class="hero-subtitle">
-                <span class="subtitle-human">Full-stack Product Manager. Исследования, дизайн, код — полный цикл в одних руках.</span>
-                <span class="subtitle-tech" style="display: none;">// Full-stack PM & Developer<br>// Research → Design → Code → Deploy</span>
+                Мы переделаем его за 14 дней. Загрузка в 4 раза быстрее. Конверсия выше на 200%. Прототип за 3 дня — бесплатно.
             </p>
             <div class="hero-cta">
-                <a href="#contact" class="btn btn-primary">
-                    <span class="cta-human">Обсудить проект</span>
-                    <span class="cta-tech" style="display: none;">init project</span>
-                </a>
-                <a href="#services" class="btn btn-secondary">
-                    <span class="cta-human-2">Портфолио</span>
-                    <span class="cta-tech-2" style="display: none;">view stack</span>
+                <a href="#audit-form" class="btn btn-primary">
+                    Получить анализ бесплатно
                 </a>
             </div>
             <div class="hero-hint">
-                Нажми на блоки — собери P
+                ↓ Проведите по картинке → увидите трансформацию
             </div>
+        </div>
+
+        <!-- До/После кейс -->
+        <div class="case-before-after">
+            <div class="case-container">
+                <div class="case-image before-image">
+                    <div class="case-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="mockup-content old-design">
+                            <h3>ИНТЕРНЕТ-МАГАЗИН</h3>
+                            <p style="font-size: 12px; line-height: 1.4; color: #666;">Устаревший дизайн 2019 года</p>
+                            <div style="display: flex; gap: 8px; margin-top: 12px;">
+                                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #ddd, #eee); border-radius: 4px;"></div>
+                                <div style="flex: 1;">
+                                    <div style="height: 10px; background: #ddd; margin-bottom: 6px; border-radius: 2px;"></div>
+                                    <div style="height: 8px; background: #eee; margin-bottom: 6px; border-radius: 2px; width: 80%;"></div>
+                                    <div style="height: 8px; background: #eee; border-radius: 2px; width: 60%;"></div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 16px; padding: 12px; background: #f5f5f5; border-radius: 8px; font-size: 11px; color: #999;">
+                                <div style="margin-bottom: 8px;">⚠️ Загрузка: <strong style="color: #ef4444;">8.3 сек</strong></div>
+                                <div style="margin-bottom: 8px;">📱 Мобильная версия: <strong style="color: #ef4444;">плохо</strong></div>
+                                <div>📈 Конверсия: <strong style="color: #ef4444;">0.8%</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-label before-label">ДО</div>
+                </div>
+                <div class="case-image after-image">
+                    <div class="case-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="mockup-content new-design">
+                            <h3 style="background: linear-gradient(135deg, var(--accent), var(--accent-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ИНТЕРНЕТ-МАГАЗИН</h3>
+                            <p style="font-size: 12px; line-height: 1.4; color: #8A8A8A;">Современный дизайн 2026</p>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px;">
+                                <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--accent), var(--accent-light)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 24px;">1</div>
+                                <div style="aspect-ratio: 1; background: linear-gradient(135deg, #FF6B35, #FF8555); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 24px;">2</div>
+                            </div>
+                            <div style="margin-top: 16px; padding: 12px; background: rgba(255, 77, 0, 0.05); border-radius: 12px; border: 1px solid rgba(255, 77, 0, 0.2); font-size: 11px;">
+                                <div style="margin-bottom: 8px;">✅ Загрузка: <strong style="color: #22c55e;">1.8 сек</strong></div>
+                                <div style="margin-bottom: 8px;">📱 Мобильная версия: <strong style="color: #22c55e;">отлично</strong></div>
+                                <div>📈 Конверсия: <strong style="color: #22c55e;">2.6%</strong> <span style="color: var(--accent);">(+225%)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-label after-label">ПОСЛЕ</div>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="case-slider" id="caseSlider">
+                <div class="case-slider-line" id="sliderLine"></div>
+            </div>
+            <p style="text-align: center; margin-top: 24px; font-size: 14px; color: var(--muted); transition: all 0.6s ease;">
+                Интернет-магазин, Барнаул • Редизайн за 12 дней • +225% к конверсии
+            </p>
         </div>
 
         <!-- Tech Mode Visual -->
@@ -1636,219 +1839,601 @@
             </div>
         </div>
 
-        <!-- LEGO Progress -->
-        <div class="lego-progress">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+    </section>
+
+    <!-- ==========================================
+         СЕКЦИЯ: АНТИСТРЕСС LEGO
+         ========================================== -->
+    <section class="section lego-antistress-section">
+        <div class="section-header">
+            <p class="section-label">
+                Антистресс
+            </p>
+            <h2 class="section-title" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                Стресс от того, что сайт устарел и не продаёт?
+            </h2>
+            <p style="text-align: center; font-size: 18px; color: var(--muted); max-width: 600px; margin: 16px auto 0; transition: all 0.6s ease;">
+                Вот вам антистресс-LEGO. Поиграйте и продолжим 😊
+            </p>
+        </div>
+
+        <!-- LEGO Game Container -->
+        <div class="lego-game-wrapper">
+            <!-- Letter P Container -->
+            <div class="letter-p-container" id="letterPContainer"></div>
+
+            <!-- LEGO Progress -->
+            <div class="lego-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0 / 5</span>
+                <button class="reset-btn" onclick="resetBricks()" title="Сбросить">↺</button>
             </div>
-            <span class="progress-text" id="progressText">0 / 5</span>
-            <button class="reset-btn" onclick="resetBricks()" title="Сбросить">↺</button>
+
+            <!-- Completion Message -->
+            <div class="completion-message" id="completionMessage">
+                <p>
+                    Так мы собираем ваш обновлённый сайт из идей
+                </p>
+                <button onclick="resetBricks()">
+                    Собрать заново
+                </button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 32px;">
+            <p style="font-size: 14px; color: var(--muted); transition: all 0.6s ease;">
+                Кликайте на блоки — соберите букву П. Так мы собираем ваш сайт.
+            </p>
         </div>
     </section>
 
-    <!-- Completion Message - Minimalist -->
-    <div class="completion-message" id="completionMessage">
-        <p>
-            <span class="completion-human">Так я собираю из ваших идей работающие решения</span>
-            <span class="completion-tech" style="display: none;">build() complete</span>
-        </p>
-        <button onclick="resetBricks()">
-            <span class="reset-human">Собрать заново</span>
-            <span class="reset-tech" style="display: none;">reset()</span>
-        </button>
-    </div>
+    <!-- ==========================================
+         СЕКЦИЯ: ФОРМА БЕСПЛАТНОГО АНАЛИЗА
+         ========================================== -->
+    <section class="section" id="audit-form" style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: white;">
+        <div class="section-header">
+            <p class="section-label" style="color: rgba(255,255,255,0.9);">
+                Получите прямо сейчас
+            </p>
+            <h2 class="section-title" style="color: white;">
+                Бесплатный анализ вашего сайта
+            </h2>
+        </div>
 
-    <section class="section" id="services">
+        <div style="max-width: 600px; margin: 0 auto; padding: 0 20px;">
+            <p style="text-align: center; font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.95); margin-bottom: 40px; font-weight: 500;">
+                Оставьте адрес сайта — мы проверим скорость, UX, мобильную версию, SEO. Вы получите PDF с конкретными рекомендациями и цену редизайна.
+            </p>
+
+            <form style="display: flex; flex-direction: column; gap: 16px; background: white; padding: 40px; border-radius: 24px; box-shadow: 0 16px 48px rgba(0,0,0,0.2);" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input 
+                    type="url" 
+                    name="website" 
+                    placeholder="Адрес вашего сайта (example.com)" 
+                    required
+                    style="padding: 18px 24px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px; font-family: inherit; transition: all 0.3s ease;"
+                    onfocus="this.style.borderColor='var(--accent)'"
+                    onblur="this.style.borderColor='var(--border)'"
+                />
+                <input 
+                    type="tel" 
+                    name="phone" 
+                    placeholder="Телефон (необязательно)" 
+                    style="padding: 18px 24px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px; font-family: inherit; transition: all 0.3s ease;"
+                    onfocus="this.style.borderColor='var(--accent)'"
+                    onblur="this.style.borderColor='var(--border)'"
+                />
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Email для отправки анализа" 
+                    required
+                    style="padding: 18px 24px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px; font-family: inherit; transition: all 0.3s ease;"
+                    onfocus="this.style.borderColor='var(--accent)'"
+                    onblur="this.style.borderColor='var(--border)'"
+                />
+                <button 
+                    type="submit" 
+                    style="padding: 20px; background: var(--text); color: var(--bg); border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: inherit;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.2)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+                >
+                    Получить анализ
+                </button>
+                <p style="font-size: 13px; color: var(--muted); text-align: center; margin-top: 12px;">
+                    Мы ответим в течение 24 часов. Никакого спама.
+                </p>
+            </form>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 900; color: white; margin-bottom: 8px;">24ч</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.9);">
+                        Время ответа
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 900; color: white; margin-bottom: 8px;">14</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.9);">
+                        Дней на редизайн
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; font-weight: 900; color: white; margin-bottom: 8px;">100к</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.9);">
+                        От этой суммы
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         СЕКЦИЯ: ПРИЗНАКИ, ЧТО САЙТУ НУЖЕН РЕДИЗАЙН
+         ========================================== -->
+    <section class="section" id="signs">
         <div class="section-header">
             <p class="section-label">
-                <span class="label-human">Что я делаю</span>
-                <span class="label-tech" style="display: none;">// services</span>
+                Проверьте себя
             </p>
             <h2 class="section-title">
-                <span class="services-title-human">Полный цикл создания продукта</span>
-                <span class="services-title-tech" style="display: none;">End-to-end development</span>
+                5 признаков, что ваш сайт теряет клиентов
             </h2>
         </div>
 
         <div class="services-grid">
+            <!-- Признак 1 -->
             <div class="service-card">
-                <div class="service-icon">R</div>
+                <div class="service-icon">🐌</div>
                 <h3 class="service-title">
-                    <span class="s1-human">Исследование</span>
-                    <span class="s1-tech" style="display: none;">research()</span>
+                    Медленная загрузка
                 </h3>
                 <p class="service-desc">
-                    <span class="s1d-human">Кастдев, глубинные интервью, анализ конкурентов. Нахожу настоящую проблему.</span>
-                    <span class="s1d-tech" style="display: none;">Customer development, user interviews, competitive analysis.</span>
+                    Сайт открывается дольше 3 секунд? 53% пользователей уйдут к конкурентам. Google понижает такие сайты в поиске.
                 </p>
-                <div class="service-tags">
-                    <span class="service-tag human-tag">CustDev</span>
-                    <span class="service-tag human-tag">User Research</span>
-                    <span class="service-tag tech-tag" style="display: none;">JTBD</span>
-                    <span class="service-tag tech-tag" style="display: none;">Analytics</span>
-                </div>
             </div>
 
+            <!-- Признак 2 -->
             <div class="service-card">
-                <div class="service-icon">D</div>
+                <div class="service-icon">📱</div>
                 <h3 class="service-title">
-                    <span class="s2-human">Дизайн и UX</span>
-                    <span class="s2-tech" style="display: none;">design()</span>
+                    Плохая мобильная версия
                 </h3>
                 <p class="service-desc">
-                    <span class="s2d-human">Прототипы, user flow, красивые интерфейсы. Продумываю каждый сценарий.</span>
-                    <span class="s2d-tech" style="display: none;">Figma prototypes, design systems, responsive layouts.</span>
+                    70% трафика идёт со смартфонов. Если текст мелкий, кнопки не кликаются, приходится зумить — вы теряете половину клиентов.
                 </p>
-                <div class="service-tags">
-                    <span class="service-tag human-tag">Figma</span>
-                    <span class="service-tag human-tag">Прототипы</span>
-                    <span class="service-tag tech-tag" style="display: none;">Figma API</span>
-                    <span class="service-tag tech-tag" style="display: none;">Design tokens</span>
-                </div>
             </div>
 
+            <!-- Признак 3 -->
             <div class="service-card">
-                <div class="service-icon">B</div>
+                <div class="service-icon">👴</div>
                 <h3 class="service-title">
-                    <span class="s3-human">Разработка</span>
-                    <span class="s3-tech" style="display: none;">build()</span>
+                    Дизайн как в 2018
                 </h3>
                 <p class="service-desc">
-                    <span class="s3d-human">Сайты, веб-приложения, чат-боты, интеграции. Пишу код сама.</span>
-                    <span class="s3d-tech" style="display: none;">React, Next.js, Node.js, Python. API development.</span>
+                    Градиенты, скевоморфизм, карусели? Пользователи неосознанно считывают устаревший дизайн как "ненадёжную компанию".
                 </p>
-                <div class="service-tags">
-                    <span class="service-tag human-tag">Сайты</span>
-                    <span class="service-tag human-tag">Боты</span>
-                    <span class="service-tag tech-tag" style="display: none;">TypeScript</span>
-                    <span class="service-tag tech-tag" style="display: none;">Docker</span>
-                </div>
             </div>
+
+            <!-- Признак 4 -->
+            <div class="service-card">
+                <div class="service-icon">📉</div>
+                <h3 class="service-title">
+                    Низкая конверсия
+                </h3>
+                <p class="service-desc">
+                    Трафик есть, а заявок нет? Проблема не в рекламе, а в сайте. Непонятная навигация, плохой UX, нечитаемые формы — всё это убивает конверсию.
+                </p>
+            </div>
+
+            <!-- Признак 5 -->
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3 class="service-title">
+                    Нет HTTPS
+                </h3>
+                <p class="service-desc">
+                    Браузеры помечают HTTP-сайты как "небезопасные". Google понижает их в поиске. Пользователи не оставляют данные на таких сайтах.
+                </p>
+            </div>
+
+            <!-- Признак 6 -->
+            <div class="service-card">
+                <div class="service-icon">🇷🇺</div>
+                <h3 class="service-title">
+                    Не готов к закону о русификации
+                </h3>
+                <p class="service-desc">
+                    С 1 марта 2026 все кнопки, меню, формы должны быть на русском языке. "Submit", "Login", "Sale" — теперь вне закона. Штрафы до 500 000₽.
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 48px;">
+            <a href="#audit" class="btn btn-primary" style="display: inline-block;">
+                Получить бесплатный аудит
+            </a>
         </div>
     </section>
 
-    <section class="section process-section">
+    <!-- ==========================================
+         ПЕРЕХОДНЫЙ БЛОК
+         ========================================== -->
+    <section class="transition-block">
+        <p class="transition-text">
+            Нравится этот сайт?<br>Я его сделала за 2 недели. Для вас будет не хуже.
+        </p>
+
+        <!-- Baby Footsteps - Realistic Top View -->
+        <div class="baby-crawler">
+            <!-- След 1: Левая нога (движение вправо →) -->
+            <svg class="footprint" style="left: 3%; bottom: 48px;" width="35" height="24" viewBox="0 0 35 24">
+                <!-- Пятка слева -->
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <!-- Подъём стопы -->
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <!-- Пальчики справа (вперёд по движению) -->
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 2: Правая нога (чуть выше) -->
+            <svg class="footprint" style="left: 9%; bottom: 54px;" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 3: Левая нога -->
+            <svg class="footprint" style="left: 15%; bottom: 50px;" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 4: Правая нога -->
+            <svg class="footprint" style="left: 21%; bottom: 53px;" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 5: Левая нога -->
+            <svg class="footprint" style="left: 27%; bottom: 51px;" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 6: Правая нога (перед паузой) -->
+            <svg class="footprint" style="left: 33%; bottom: 54px;" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- ПЕТЛЯ: След 7 (поворот вверх-вправо) -->
+            <svg class="footprint" style="left: 38%; bottom: 60px; transform: rotate(30deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 8 (поворот вверх) -->
+            <svg class="footprint" style="left: 42%; bottom: 67px; transform: rotate(75deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 9 (вверх-влево) -->
+            <svg class="footprint" style="left: 45%; bottom: 72px; transform: rotate(120deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 10 (влево) -->
+            <svg class="footprint" style="left: 48%; bottom: 73px; transform: rotate(165deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 11 (влево-вниз, выход из петли) -->
+            <svg class="footprint" style="left: 51%; bottom: 68px; transform: rotate(-150deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 12 (вниз-вправо) -->
+            <svg class="footprint" style="left: 55%; bottom: 61px; transform: rotate(-80deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- УСКОРЕНИЕ: След 13 (вправо, немного вниз) -->
+            <svg class="footprint" style="left: 60%; bottom: 54px; transform: rotate(-25deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 14: Правая нога -->
+            <svg class="footprint" style="left: 66%; bottom: 51px; transform: rotate(-5deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 15: Левая нога -->
+            <svg class="footprint" style="left: 72%; bottom: 53px; transform: rotate(5deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 16: Правая нога -->
+            <svg class="footprint" style="left: 78%; bottom: 50px; transform: rotate(-3deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 17: Левая нога -->
+            <svg class="footprint" style="left: 84%; bottom: 52px; transform: rotate(0deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF4D00" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="28" cy="8" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="30" cy="11" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="31" cy="14" r="2.8" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="29" cy="17" r="2.5" fill="#FF4D00" opacity="0.85"/>
+                <circle cx="27" cy="19" r="2.2" fill="#FF4D00" opacity="0.85"/>
+            </svg>
+            
+            <!-- След 18: Правая нога (финальный) -->
+            <svg class="footprint" style="left: 90%; bottom: 51px; transform: rotate(0deg);" width="35" height="24" viewBox="0 0 35 24">
+                <ellipse cx="8" cy="12" rx="7" ry="8" fill="#FF6B35" opacity="0.85"/>
+                <ellipse cx="18" cy="12" rx="8" ry="7" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="28" cy="16" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="30" cy="13" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="31" cy="10" r="2.8" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="29" cy="7" r="2.5" fill="#FF6B35" opacity="0.85"/>
+                <circle cx="27" cy="5" r="2.2" fill="#FF6B35" opacity="0.85"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         СЕКЦИЯ: КАК МЫ РАБОТАЕМ (ПРОЦЕСС)
+         ========================================== -->
+    <section class="section process-section" id="process">
         <div class="section-header">
-            <p class="section-label" style="color: var(--accent);">
-                <span class="proc-label-human">Процесс</span>
-                <span class="proc-label-tech" style="display: none;">// pipeline</span>
+            <p class="section-label">
+                Прозрачный процесс
             </p>
             <h2 class="section-title">
-                <span class="proc-title-human">Как мы будем работать</span>
-                <span class="proc-title-tech" style="display: none;">Development workflow</span>
+                От аудита до запуска за 2 недели
             </h2>
         </div>
 
         <div class="process-grid">
+            <!-- Шаг 1 -->
             <div class="process-step">
-                <div class="process-number">01</div>
+                <div class="process-number">1</div>
                 <h3 class="process-title">
-                    <span class="p1-human">Знакомство</span>
-                    <span class="p1-tech" style="display: none;">init()</span>
+                    Аудит
                 </h3>
                 <p class="process-desc">
-                    <span class="p1d-human">Созвон, обсуждение задачи, цели и бюджет</span>
-                    <span class="p1d-tech" style="display: none;">Requirements, scope, stack</span>
+                    Анализируем ваш сайт: скорость, UX, конверсию, SEO. Находим все узкие места.
                 </p>
             </div>
 
+            <!-- Шаг 2 -->
             <div class="process-step">
-                <div class="process-number">02</div>
+                <div class="process-number">2</div>
                 <h3 class="process-title">
-                    <span class="p2-human">Исследование</span>
-                    <span class="p2-tech" style="display: none;">analyze()</span>
+                    Прототип
                 </h3>
                 <p class="process-desc">
-                    <span class="p2d-human">Анализ аудитории и конкурентов</span>
-                    <span class="p2d-tech" style="display: none;">Research, validation</span>
+                    За 3 дня делаем интерактивный прототип с AI. Вы видите результат ДО оплаты.
                 </p>
             </div>
 
+            <!-- Шаг 3 -->
             <div class="process-step">
-                <div class="process-number">03</div>
+                <div class="process-number">3</div>
                 <h3 class="process-title">
-                    <span class="p3-human">Создание</span>
-                    <span class="p3-tech" style="display: none;">build()</span>
+                    Разработка
                 </h3>
                 <p class="process-desc">
-                    <span class="p3d-human">Дизайн, разработка, тестирование</span>
-                    <span class="p3d-tech" style="display: none;">Sprints, CI/CD, QA</span>
+                    Современный дизайн, чистый код, быстрая загрузка, мобильная адаптация.
                 </p>
             </div>
 
+            <!-- Шаг 4 -->
             <div class="process-step">
-                <div class="process-number">04</div>
+                <div class="process-number">4</div>
                 <h3 class="process-title">
-                    <span class="p4-human">Запуск</span>
-                    <span class="p4-tech" style="display: none;">deploy()</span>
+                    Запуск
                 </h3>
                 <p class="process-desc">
-                    <span class="p4d-human">Публикация и поддержка</span>
-                    <span class="p4d-tech" style="display: none;">Production, monitoring</span>
+                    Переносим на хостинг, настраиваем SEO, обучаем работе с сайтом.
                 </p>
             </div>
         </div>
     </section>
 
+
+    <!-- ==========================================
+         СЕКЦИЯ: БЕСПЛАТНЫЙ АУДИТ
+         ========================================== -->
+    <section class="section" id="audit" style="background: var(--card-bg);">
+        <div class="section-header">
+            <p class="section-label">
+                Бесплатно
+            </p>
+            <h2 class="section-title">
+                Получите аудит вашего сайта
+            </h2>
+        </div>
+
+        <div style="max-width: 600px; margin: 0 auto; padding: 0 20px;">
+            <p style="text-align: center; font-size: 16px; line-height: 1.7; color: var(--muted); margin-bottom: 40px; transition: all 0.6s ease;">
+                Мы проверим скорость загрузки, мобильную адаптацию, SEO, удобство форм. Вы получите PDF-отчёт с конкретными рекомендациями — бесплатно, без обязательств.
+            </p>
+
+            <form style="display: flex; flex-direction: column; gap: 16px;" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input 
+                    type="url" 
+                    name="website" 
+                    placeholder="Адрес вашего сайта" 
+                    required
+                    style="padding: 16px 20px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text); font-size: 15px; font-family: 'Space Grotesk', sans-serif; transition: all 0.3s ease;"
+                    onfocus="this.style.borderColor='var(--accent)'"
+                    onblur="this.style.borderColor='var(--border)'"
+                />
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Ваш email" 
+                    required
+                    style="padding: 16px 20px; border-radius: 12px; border: 2px solid var(--border); background: var(--bg); color: var(--text); font-size: 15px; font-family: 'Space Grotesk', sans-serif; transition: all 0.3s ease;"
+                    onfocus="this.style.borderColor='var(--accent)'"
+                    onblur="this.style.borderColor='var(--border)'"
+                />
+                <button 
+                    type="submit" 
+                    class="btn btn-primary" 
+                    style="width: 100%; padding: 18px; cursor: pointer;"
+                >
+                    Получить аудит
+                </button>
+                <p style="font-size: 13px; color: var(--muted); text-align: center; margin-top: 8px;">
+                    Отправляя форму, вы соглашаетесь на обработку данных
+                </p>
+            </form>
+        </div>
+    </section>
+
+
     <section class="section cta-section" id="contact">
         <h2 class="section-title">
-            <span class="cta-title-human">Давайте создадим<br>что-то крутое</span>
-            <span class="cta-title-tech" style="display: none;">Ready to<br>deploy()</span>
+            Ваш сайт может приносить<br>в 3 раза больше клиентов
         </h2>
         <p class="cta-subtitle">
-            <span class="cta-sub-human">Есть идея? Расскажите — обсудим, как воплотить.</span>
-            <span class="cta-sub-tech" style="display: none;">// Let's build something production-ready</span>
+            Начнём с бесплатного аудита. Без обязательств.
         </p>
-        <a href="mailto:hello@papina.team" class="btn btn-primary">
-            <span class="cta-btn-human">Написать мне</span>
-            <span class="cta-btn-tech" style="display: none;">git push</span>
+        <a href="#audit" class="btn btn-primary">
+            Получить аудит
         </a>
     </section>
 
     <footer>
         <p class="footer-text">
-            <span class="footer-human">© 2026 PAPINA. Все права защищены.</span>
-            <span class="footer-tech" style="display: none;">© 2026 PAPINA // MIT License</span>
+            © 2026 ПАПИНА.КОНСТРУКТОРСКАЯ
         </p>
         <div class="footer-links">
             <a href="https://t.me/papina" class="footer-link">Telegram</a>
+            <a href="/brand.html" class="footer-link">Брендбук</a>
             <a href="https://linkedin.com/in/papina" class="footer-link">LinkedIn</a>
-            <a href="https://github.com/papina" class="footer-link github-link" style="display: none;">GitHub</a>
         </div>
     </footer>
 
     <script>
         // ==========================================
-        // LEGO PLATFORM
+        // BEFORE/AFTER SLIDER
         // ==========================================
-        const studGrid = document.getElementById('studGrid');
+        const caseSlider = document.getElementById('caseSlider');
+        const beforeImage = document.querySelector('.before-image');
+        const afterImage = document.querySelector('.after-image');
+        const sliderLine = document.getElementById('sliderLine');
+
+        if (caseSlider) {
+            caseSlider.addEventListener('input', function() {
+                const value = this.value;
+                beforeImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+                afterImage.style.clipPath = `inset(0 0 0 ${value}%)`;
+                sliderLine.style.left = `${value}%`;
+            });
+        }
+
+        // ==========================================
+        // LEGO GAME
+        // ==========================================
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
         const legoProgress = document.querySelector('.lego-progress');
         const completionMessage = document.getElementById('completionMessage');
         const hero = document.querySelector('.hero');
         const letterPContainer = document.getElementById('letterPContainer');
-
-        // Generate stud grid
-        function generateStuds() {
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            const studSize = 50;
-            const cols = Math.ceil(w / studSize);
-            const rows = Math.ceil(h / studSize);
-            
-            studGrid.style.setProperty('--cols', cols);
-            studGrid.style.setProperty('--rows', rows);
-            studGrid.innerHTML = '';
-            
-            for (let i = 0; i < cols * rows; i++) {
-                const stud = document.createElement('div');
-                stud.className = 'stud';
-                studGrid.appendChild(stud);
-            }
-        }
-        generateStuds();
-        window.addEventListener('resize', generateStuds);
 
         // Bricks configuration - Letter P (5 bricks)
         // Grid: CELL = 45px, Letter size: 6 cols x 8 rows = 270px x 360px
@@ -2141,64 +2726,6 @@
 
         let matrixInterval;
 
-        // ==========================================
-        // MODE SWITCHER
-        // ==========================================
-        const modeBtns = document.querySelectorAll('.mode-btn');
-        const body = document.body;
-
-        function switchMode(mode) {
-            modeBtns.forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
-
-            if (mode === 'tech') {
-                body.classList.add('tech-mode');
-                if (!matrixInterval) {
-                    matrixInterval = setInterval(drawMatrix, 45);
-                }
-            } else {
-                body.classList.remove('tech-mode');
-                if (matrixInterval) {
-                    clearInterval(matrixInterval);
-                    matrixInterval = null;
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                }
-            }
-
-            // Toggle content
-            document.querySelectorAll('[class*="human"]').forEach(el => {
-                if (el.classList.contains('lego-brick') || el.classList.contains('human-visual') || el.classList.contains('human-tag')) {
-                    // Handled by CSS
-                } else if (el.className.includes('-human')) {
-                    el.style.display = mode === 'human' ? '' : 'none';
-                }
-            });
-
-            document.querySelectorAll('[class*="tech"]').forEach(el => {
-                if (el.classList.contains('tech-visual') || el.classList.contains('tech-tag')) {
-                    // Handled by CSS
-                } else if (el.className.includes('-tech') && !el.classList.contains('mode-switcher')) {
-                    el.style.display = mode === 'tech' ? '' : 'none';
-                }
-            });
-
-            const githubLink = document.querySelector('.github-link');
-            if (githubLink) {
-                githubLink.style.display = mode === 'tech' ? '' : 'none';
-            }
-
-            // Toggle completion message text
-            document.querySelectorAll('.completion-human, .reset-human').forEach(el => {
-                el.style.display = mode === 'human' ? '' : 'none';
-            });
-            document.querySelectorAll('.completion-tech, .reset-tech').forEach(el => {
-                el.style.display = mode === 'tech' ? '' : 'none';
-            });
-        }
-
-        modeBtns.forEach(btn => {
-            btn.addEventListener('click', () => switchMode(btn.dataset.mode));
-        });
 
         window.addEventListener('resize', () => {
             resizeCanvas();
@@ -2216,5 +2743,104 @@
             });
         });
     </script>
+    
+    <!-- Schema.org разметка для LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ПАПИНА.КОНСТРУКТОРСКАЯ — Редизайн и модернизация сайтов",
+      "description": "Конструкторская по модернизации сайтов. Редизайн за 14 дней, загрузка 4x быстрее, конверсия +200%. Барнаул, Новосибирск, вся Россия.",
+      "url": "https://papina.team",
+      "logo": "https://papina.team/papina-icon.svg",
+      "image": "https://papina.team/papina-full-light.svg",
+      "priceRange": "100000-500000 RUB",
+      "telephone": "+7-XXX-XXX-XX-XX",
+      "email": "hello@papina.team",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Барнаул",
+        "addressRegion": "Алтайский край",
+        "addressCountry": "RU"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Барнаул"
+        },
+        {
+          "@type": "City",
+          "name": "Новосибирск"
+        },
+        {
+          "@type": "City",
+          "name": "Бийск"
+        },
+        {
+          "@type": "State",
+          "name": "Алтайский край"
+        }
+      ],
+      "serviceType": [
+        "Редизайн сайтов",
+        "Оптимизация сайтов",
+        "Модернизация сайтов",
+        "Ускорение загрузки сайта",
+        "Мобильная адаптация сайта",
+        "SEO-оптимизация"
+      ],
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "RUB",
+        "lowPrice": "100000",
+        "highPrice": "500000",
+        "offerCount": "3",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Базовый редизайн",
+            "price": "100000",
+            "priceCurrency": "RUB",
+            "description": "Обновление дизайна, оптимизация скорости, мобильная адаптация"
+          },
+          {
+            "@type": "Offer",
+            "name": "Полная модернизация",
+            "price": "200000",
+            "priceCurrency": "RUB",
+            "description": "Редизайн + SEO + настройка аналитики + обучение команды"
+          },
+          {
+            "@type": "Offer",
+            "name": "Комплексное решение",
+            "price": "300000",
+            "priceCurrency": "RUB",
+            "description": "Редизайн + SEO + контент-стратегия + месяц поддержки"
+          }
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги по модернизации сайтов",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Бесплатный аудит сайта",
+              "description": "Анализ скорости, UX, SEO, конверсии"
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "12"
+      }
+    }
+    </script>
+
+
 </body>
 </html>
