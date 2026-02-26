@@ -383,9 +383,84 @@
             line-height: 1.7;
         }
 
+        /* Сетка вариантов */
+        .var-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .var-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px 32px 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: center;
+        }
+
+        .var-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 32px rgba(255, 77, 0, 0.1);
+        }
+
+        .var-num {
+            position: absolute;
+            top: 14px;
+            left: 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .var-logo {
+            line-height: 1;
+            margin-bottom: 20px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .vl-main {
+            font-family: 'Dela Gothic One', sans-serif;
+            font-weight: 400;
+            color: var(--text);
+            display: block;
+            position: relative;
+        }
+
+        .vl-dot {
+            position: absolute;
+            right: -9px;
+            bottom: 3px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2.5s infinite;
+        }
+
+        .vl-sub {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: block;
+        }
+
+        .var-desc {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .logo-showcase, .rules-grid {
+            .logo-showcase, .rules-grid, .var-grid {
                 grid-template-columns: 1fr;
             }
             .container {
@@ -406,9 +481,127 @@
         <p class="subtitle">Брендбук для партнёров</p>
     </header>
 
-    <!-- ЛОГОТИП -->
+    <!-- ВАРИАНТЫ ЛОГО -->
     <div class="section">
-        <h2>Логотип</h2>
+        <h2>Подбор пропорций</h2>
+        <p style="font-size: 15px; color: var(--muted); margin-bottom: 32px; margin-top: -16px;">Одно и то же сочетание — разные расстояния, разрядки, соотношения ширин. Выбери вариант, который нравится.</p>
+
+        <div class="var-grid">
+
+            <div class="var-card">
+                <div class="var-num">01</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:2px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:11px; letter-spacing:3.5px; margin-top:8px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Текущий. Средний зазор, умеренная разрядка</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">02</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:2px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:11px; letter-spacing:3.5px; margin-top:4px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Плотнее. Зазор 4px — слова ближе друг к другу</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">03</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:2px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:11px; letter-spacing:3.5px; margin-top:14px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Воздушнее. Зазор 14px — больше пространства</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">04</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:4px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:11px; letter-spacing:3.5px; margin-top:8px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">ПАПИНА шире (ls 4px). Контраст масштабов</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">05</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:1px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:11px; letter-spacing:3.5px; margin-top:8px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">ПАПИНА плотнее (ls 1px). Массивный блок</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">06</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:2px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:10px; letter-spacing:5.5px; margin-top:8px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Суб шире (ls 5.5px). Почти одна ширина</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">07</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:2px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:9px; letter-spacing:2px; margin-top:6px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Суб компактнее (ls 2px, 9px). Подпись-шёпот</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">08</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:44px; letter-spacing:3px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:10px; letter-spacing:3px; margin-top:6px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">ПАПИНА крупнее (44px, ls 3px). Доминирует</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">09</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:36px; letter-spacing:1px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:12px; letter-spacing:4px; margin-top:6px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Ближе по размерам (36/12). Равнее, партнёрство</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">10</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:2px;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:11px; letter-spacing:3.5px; margin-top:2px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Максимально плотно (зазор 2px). Монолит</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">11</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:40px; letter-spacing:0;">ПАПИНА<span class="vl-dot"></span></span>
+                    <span class="vl-sub" style="font-size:11px; letter-spacing:3.5px; margin-top:8px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">ПАПИНА без разрядки (ls 0). Плотный, тяжёлый</div>
+            </div>
+
+            <div class="var-card">
+                <div class="var-num">12</div>
+                <div class="var-logo">
+                    <span class="vl-main" style="font-size:42px; letter-spacing:2px;">ПАПИНА<span class="vl-dot" style="width:7px;height:7px;"></span></span>
+                    <span class="vl-sub" style="font-size:10px; letter-spacing:4.5px; margin-top:10px;">КОНСТРУКТОРСКАЯ</span>
+                </div>
+                <div class="var-desc">Баланс. 42/10px, зазор 10, ls 4.5. Точка крупнее</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- УТВЕРЖДЁННЫЙ ЛОГОТИП -->
+    <div class="section">
+        <h2>Утверждённый логотип</h2>
 
         <div class="logo-showcase">
             <div class="logo-bg-light">
