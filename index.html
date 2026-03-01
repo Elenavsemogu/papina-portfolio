@@ -413,15 +413,15 @@
         }
 
         .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
+            width: 52px;
+            height: 52px;
             margin-bottom: 16px;
-            background: var(--accent-glow);
+        }
+
+        .card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .card h3 {
@@ -1429,22 +1429,22 @@
         </div>
         <div class="cards-grid" style="margin-top:40px;">
             <div class="card reveal">
-                <div class="card-icon">🐌</div>
+                <div class="card-icon"><img src="hourglass.png" alt=""></div>
                 <h3>Сайт долго грузится</h3>
                 <p>53% людей уходят, если сайт открывается дольше 3 секунд. Каждая лишняя секунда — это минус 7% заявок. Поисковики тоже это замечают и понижают сайт в выдаче.</p>
             </div>
             <div class="card reveal">
-                <div class="card-icon">📱</div>
+                <div class="card-icon"><img src="smarphone.png" alt=""></div>
                 <h3>На телефоне всё разъезжается</h3>
                 <p>70% людей заходят с телефона. Если кнопки мелкие, текст не читается, приходится зумить — они просто закроют страницу и уйдут к конкуренту.</p>
             </div>
             <div class="card reveal">
-                <div class="card-icon">🎨</div>
+                <div class="card-icon"><img src="olddisc.png" alt=""></div>
                 <h3>Дизайн выглядит устаревшим</h3>
                 <p>75% людей оценивают надёжность компании по внешнему виду сайта. Устаревший дизайн воспринимается как сигнал: «Здесь что-то не так».</p>
             </div>
             <div class="card reveal">
-                <div class="card-icon">📉</div>
+                <div class="card-icon"><img src="arrow.png" alt=""></div>
                 <h3>Трафик есть, а заявок мало</h3>
                 <p>Реклама приводит людей на сайт, а они ничего не делают. Чаще всего дело в неудобной навигации, непонятных формах или отсутствии чёткого призыва к действию.</p>
             </div>
@@ -1923,7 +1923,7 @@ function handleSubmit(e) {
         fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' })
+            body: JSON.stringify({ chat_id: CHAT_ID, text })
         }).catch(() => {});
     }
 
