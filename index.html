@@ -1163,9 +1163,9 @@
         }
 
         .lego-studs-grid .bp-stud {
-            width: 33px;
-            height: 33px;
-            margin: 6px;
+            width: var(--bp-stud-size, 33px);
+            height: var(--bp-stud-size, 33px);
+            margin: var(--bp-stud-margin, 6px);
             border-radius: 50%;
             background:
                 radial-gradient(ellipse 50% 35% at 35% 30%, rgba(255,200,130,0.7) 0%, transparent 60%),
@@ -2185,20 +2185,44 @@ let legoPlaced = 0;
 const letterP = document.getElementById('letterP');
 
 const studsGrid = document.getElementById('legoStudsGrid');
-if (studsGrid) {
+function buildStudsGrid() {
+    if (!studsGrid) return;
     const wrapper = document.getElementById('legoWrapper');
     const W = wrapper.offsetWidth;
     const H = wrapper.offsetHeight;
-    const letterX = (W - 270) / 2;
-    const letterY = (H - 360) / 2;
-    const originX = letterX % 45;
-    const originY = letterY % 45;
-    const cols = Math.floor((W - originX) / 45);
-    const rows = Math.floor((H - originY) / 45);
+
+    const lpStyle = window.getComputedStyle(letterP);
+    const matrix = lpStyle.transform;
+    let scale = 1;
+    if (matrix && matrix !== 'none') {
+        const vals = matrix.match(/matrix\((.+)\)/);
+        if (vals) scale = parseFloat(vals[1].split(',')[0]);
+    }
+
+    const BASE_CELL = 45;
+    const BASE_STUD = 33;
+    const BASE_MARGIN = 6;
+    const cell = Math.round(BASE_CELL * scale);
+    const studSize = Math.round(BASE_STUD * scale);
+    const studMargin = Math.round(BASE_MARGIN * scale);
+
+    wrapper.style.setProperty('--bp-stud-size', studSize + 'px');
+    wrapper.style.setProperty('--bp-stud-margin', studMargin + 'px');
+
+    const letterW = 270 * scale;
+    const letterH = 360 * scale;
+    const letterX = (W - letterW) / 2;
+    const letterY = (H - letterH) / 2;
+    const originX = letterX % cell;
+    const originY = letterY % cell;
+    const cols = Math.floor((W - originX) / cell);
+    const rows = Math.floor((H - originY) / cell);
+
+    studsGrid.innerHTML = '';
     studsGrid.style.left = originX + 'px';
     studsGrid.style.top = originY + 'px';
-    studsGrid.style.gridTemplateColumns = 'repeat(' + cols + ', 45px)';
-    studsGrid.style.gridTemplateRows = 'repeat(' + rows + ', 45px)';
+    studsGrid.style.gridTemplateColumns = 'repeat(' + cols + ', ' + cell + 'px)';
+    studsGrid.style.gridTemplateRows = 'repeat(' + rows + ', ' + cell + 'px)';
     const frag = document.createDocumentFragment();
     for (let i = 0; i < cols * rows; i++) {
         const s = document.createElement('div');
@@ -2207,6 +2231,8 @@ if (studsGrid) {
     }
     studsGrid.appendChild(frag);
 }
+buildStudsGrid();
+window.addEventListener('resize', () => { clearTimeout(window._sgTimer); window._sgTimer = setTimeout(buildStudsGrid, 200); });
 
 function initLego() {
     if (!letterP) return;
