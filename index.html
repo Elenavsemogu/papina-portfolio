@@ -902,6 +902,30 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
+        .consent-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 12px;
+            max-width: 640px;
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .consent-label input[type="checkbox"] {
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: var(--accent);
+        }
+
+        .consent-label a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
         .cta-guarantees {
             display: flex;
             gap: 24px;
@@ -1090,25 +1114,46 @@
 
         .case-metrics {
             display: flex;
-            gap: 20px;
+            gap: 0;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            margin-top: 16px;
         }
 
         .case-metric {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            align-items: center;
+            text-align: center;
+            gap: 4px;
+            position: relative;
+        }
+
+        .case-metric + .case-metric::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 1px;
+            background: var(--border);
         }
 
         .case-metric-value {
             font-family: 'Manrope', sans-serif;
             font-weight: 800;
-            font-size: 20px;
+            font-size: 22px;
             color: var(--accent);
+            line-height: 1.2;
         }
 
         .case-metric-label {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         /* EMPATHY + LEGO */
@@ -1795,6 +1840,10 @@
             <input type="tel" name="phone" placeholder="Телефон или Telegram">
             <button type="submit">Отправить →</button>
         </form>
+        <label class="consent-label">
+            <input type="checkbox" id="consentCheck" checked>
+            <span>Нажимая «Отправить», вы соглашаетесь с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и даёте согласие на обработку персональных данных</span>
+        </label>
         <div class="cta-guarantees reveal">
             <span>✓ Бесплатно</span>
             <span>✓ Без обязательств</span>
@@ -1937,19 +1986,18 @@
         </div>
         <div class="footer-col">
             <h4>Контакты</h4>
-            <a href="mailto:hello@papina.team">hello@papina.team</a>
-            <a href="https://t.me/Elen_just_Elen" target="_blank" rel="noopener">Telegram →</a>
+            <a href="https://t.me/Elen_just_Elen" target="_blank" rel="noopener">Написать в Telegram →</a>
             <p style="margin-top:8px;font-size:13px;">Барнаул, Алтайский край<br>Работаем удалённо по всей России</p>
         </div>
     </div>
     <div class="footer-bottom">
         <div class="footer-legal">
             ИП Папина Елена Алексеевна<br>
-            <!-- ОГРНИП и ИНН заполнить -->
+            ОГРНИП 319222500023811 &middot; ИНН 645485103174<br>
             © 2026 ПАПИНА. Все права защищены.
         </div>
         <div class="footer-legal">
-            <a href="#">Политика конфиденциальности</a> &bull; <a href="#">Публичная оферта</a>
+            <a href="privacy.html">Политика конфиденциальности</a> &bull; <a href="offer.html">Публичная оферта</a>
         </div>
     </div>
 </footer>
@@ -2143,6 +2191,10 @@ const CHAT_ID = '473640248';
 
 function handleSubmit(e) {
     e.preventDefault();
+    if (!document.getElementById('consentCheck').checked) {
+        alert('Пожалуйста, дайте согласие на обработку персональных данных');
+        return false;
+    }
     const form = document.getElementById('auditForm');
     const data = new FormData(form);
     const rawSite = data.get('website');
