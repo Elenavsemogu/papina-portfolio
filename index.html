@@ -18,9 +18,9 @@
         :root {
             --bg: #F5F3EF;
             --text: #1A1A1A;
-            --accent: #FF4D00;
-            --accent-light: #FF6B35;
-            --accent-glow: rgba(255, 77, 0, 0.15);
+            --accent: #E8590C;
+            --accent-light: #F07020;
+            --accent-glow: rgba(232, 89, 12, 0.12);
             --muted: #6B6B6B;
             --card-bg: #FFFFFF;
             --border: rgba(26, 26, 26, 0.08);
@@ -36,6 +36,17 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 200px;
         }
 
         /* NAV */
@@ -848,6 +859,99 @@
             padding: 20px;
         }
 
+        .case-ba-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            cursor: col-resize;
+        }
+
+        .case-ba-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .case-ba-container .case-ba-before {
+            clip-path: inset(0 50% 0 0);
+        }
+
+        .case-ba-container .case-ba-after {
+            clip-path: inset(0 0 0 50%);
+        }
+
+        .case-ba-slider-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: #fff;
+            z-index: 10;
+            pointer-events: none;
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
+        }
+
+        .case-ba-slider-line::after {
+            content: '⟨ ⟩';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--text);
+            letter-spacing: 2px;
+        }
+
+        .case-ba-label {
+            position: absolute;
+            bottom: 10px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .case-ba-label-before {
+            left: 10px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+        }
+
+        .case-ba-label-after {
+            right: 10px;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .case-ba-range {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: col-resize;
+            z-index: 15;
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         .case-body { padding: 24px; }
 
         .case-name {
@@ -922,12 +1026,38 @@
         .lego-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 1;
-            max-width: 420px;
+            aspect-ratio: 3/4;
+            max-width: 500px;
             border-radius: var(--radius);
             overflow: hidden;
-            background: linear-gradient(135deg, #FF5500 0%, #FF4D00 50%, #E84400 100%);
+            background: linear-gradient(145deg, #E8610E 0%, #D4500A 100%);
             margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+
+        .lego-studs-grid {
+            position: absolute;
+            inset: 8px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 28px);
+            grid-template-rows: repeat(auto-fill, 28px);
+            gap: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .lego-studs-grid .bp-stud {
+            width: 18px;
+            height: 18px;
+            margin: 5px;
+            border-radius: 50%;
+            background:
+                radial-gradient(ellipse 50% 35% at 35% 30%, rgba(255,200,130,0.7) 0%, transparent 60%),
+                linear-gradient(145deg, #F07020 0%, #D45A0C 100%);
+            box-shadow:
+                inset 0 -2px 4px rgba(0,0,0,0.2),
+                inset 0 1px 2px rgba(255,200,130,0.6),
+                0 1.5px 3px rgba(0,0,0,0.15);
         }
 
         .letter-p-container {
@@ -937,7 +1067,9 @@
             transform: translate(-50%, -50%);
             width: 270px;
             height: 360px;
+            z-index: 2;
         }
+
 
         .lego-brick {
             position: absolute;
@@ -1013,40 +1145,74 @@
 
         .lego-done {
             position: absolute;
-            inset: 0;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
+            gap: 10px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.6s;
             z-index: 80;
+            white-space: nowrap;
         }
 
         .lego-done.show { opacity: 1; pointer-events: auto; }
 
         .lego-done p {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
             color: white;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+            margin: 0;
         }
 
-        .lego-done button {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255,255,255,0.6);
-            padding: 10px 20px;
+        .lego-done .lego-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--accent);
+            padding: 10px 24px;
             border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
             cursor: pointer;
             font-family: inherit;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
         }
 
-        .lego-done button:hover { background: rgba(255,255,255,0.1); border-color: white; }
+        .lego-done .lego-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+
+        .lego-reset-btn {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.4);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 90;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s, background 0.2s;
+            backdrop-filter: blur(4px);
+        }
+
+        .lego-reset-btn.show { opacity: 1; pointer-events: auto; }
+        .lego-reset-btn:hover { background: rgba(255,255,255,0.35); border-color: white; }
 
         /* FOOTER */
         footer {
@@ -1141,7 +1307,7 @@
             .block-tower { display: none; }
             .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
             .empathy-grid { grid-template-columns: 1fr; }
-            .lego-wrapper { max-width: 360px; }
+            .lego-wrapper { max-width: 420px; }
             .footer-grid { grid-template-columns: 1fr; gap: 32px; }
         }
 
@@ -1162,8 +1328,7 @@
             .audit-form input { min-width: auto; }
             .case-card { min-width: 300px; }
             .footer-bottom { flex-direction: column; text-align: center; }
-            .lego-wrapper { aspect-ratio: 4/5; }
-            .letter-p-container { transform: translate(-50%, -50%) scale(0.75); }
+            .letter-p-container { transform: translate(-50%, -50%) scale(0.7); }
         }
 
         @media (max-width: 480px) {
@@ -1171,6 +1336,8 @@
             .section-title { font-size: 24px; }
             .pricing-card { padding: 28px 20px; }
             .pricing-price { font-size: 28px; }
+            .letter-p-container { transform: translate(-50%, -50%) scale(0.55); }
+            .case-ba-container { height: 260px; }
         }
     </style>
 </head>
@@ -1239,9 +1406,9 @@
                         <p style="font-size:11px;color:#999;margin-bottom:12px;">Современный дизайн 2026</p>
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
                             <div style="aspect-ratio:1;background:linear-gradient(135deg,var(--accent),var(--accent-light));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;">1</div>
-                            <div style="aspect-ratio:1;background:linear-gradient(135deg,#FF6B35,#FF8555);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;">2</div>
+                            <div style="aspect-ratio:1;background:linear-gradient(135deg,#F07020,#F08040);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;">2</div>
                         </div>
-                        <div style="margin-top:14px;padding:10px;background:rgba(255,77,0,0.05);border-radius:10px;border:1px solid rgba(255,77,0,0.15);font-size:11px;">
+                        <div style="margin-top:14px;padding:10px;background:rgba(232,89,12,0.05);border-radius:10px;border:1px solid rgba(232,89,12,0.15);font-size:11px;">
                             <div style="margin-bottom:6px;">Загрузка: <strong style="color:#22c55e;">1.8 сек</strong></div>
                             <div style="margin-bottom:6px;">Мобильная: <strong style="color:#22c55e;">отлично</strong></div>
                             <div>Конверсия: <strong style="color:#22c55e;">2.6%</strong> <span style="color:var(--accent);">(+225%)</span></div>
@@ -1253,7 +1420,7 @@
             <input type="range" min="0" max="100" value="50" class="ba-slider" id="baSlider">
             <div class="ba-line" id="baLine"></div>
         </div>
-        <p class="ba-caption">Интернет-магазин, Барнаул &bull; Редизайн за 12 дней</p>
+        <p class="ba-caption">Интернет-магазин, Барнаул &bull; Редизайн за 3 дня</p>
     </div>
 </section>
 
@@ -1504,13 +1671,20 @@
             <h2 class="section-title">Кейсы</h2>
         </div>
         <div class="cases-scroll" style="margin-top:40px;">
-            <div class="case-card reveal">
-                <div class="case-visual">
-                    <div class="placeholder-text">Студия красоты<br>До / После</div>
+            <div class="case-card reveal" style="min-width:420px;max-width:520px;">
+                <div class="case-visual" style="height:auto;padding:0;">
+                    <div class="case-ba-container" id="caseBaContainer">
+                        <img class="case-ba-before" src="case-jzpmu-before.jpg" alt="Сайт до редизайна">
+                        <img class="case-ba-after" src="case-jzpmu-after.jpg" alt="Сайт после редизайна">
+                        <div class="case-ba-slider-line" id="caseBaLine"></div>
+                        <span class="case-ba-label case-ba-label-before">До</span>
+                        <span class="case-ba-label case-ba-label-after">После</span>
+                        <input type="range" min="0" max="100" value="50" class="case-ba-range" id="caseBaRange">
+                    </div>
                 </div>
                 <div class="case-body">
-                    <div class="case-name">Юлина студия</div>
-                    <div class="case-desc">Редизайн сайта студии красоты. Обновили дизайн, ускорили загрузку, адаптировали под мобильные.</div>
+                    <div class="case-name">JZPMU — студия ПМ</div>
+                    <div class="case-desc">Полный редизайн: с тёмной Тильды на современный светлый сайт с записью, услугами, FAQ и формой заявки.</div>
                     <div class="case-metrics">
                         <div class="case-metric">
                             <span class="case-metric-value">×4</span>
@@ -1521,7 +1695,7 @@
                             <span class="case-metric-label">Конверсия</span>
                         </div>
                         <div class="case-metric">
-                            <span class="case-metric-value">12 дн</span>
+                            <span class="case-metric-value">3 дня</span>
                             <span class="case-metric-label">Срок</span>
                         </div>
                     </div>
@@ -1547,13 +1721,13 @@
                             <span class="case-metric-label">PageSpeed</span>
                         </div>
                         <div class="case-metric">
-                            <span class="case-metric-value">10 дн</span>
+                            <span class="case-metric-value">3 дня</span>
                             <span class="case-metric-label">Срок</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="case-card reveal" style="background:linear-gradient(135deg,rgba(255,77,0,0.03),rgba(255,77,0,0.08));border-color:rgba(255,77,0,0.15);">
+            <div class="case-card reveal" style="background:linear-gradient(135deg,rgba(232,89,12,0.03),rgba(232,89,12,0.08));border-color:rgba(232,89,12,0.15);">
                 <div class="case-visual" style="background:transparent;display:flex;align-items:center;justify-content:center;height:auto;padding:48px 24px;">
                     <div style="text-align:center;">
                         <div style="font-size:48px;margin-bottom:16px;">🎬</div>
@@ -1585,12 +1759,14 @@
             </div>
             <div class="reveal">
                 <div class="lego-wrapper" id="legoWrapper">
+                    <div class="lego-studs-grid" id="legoStudsGrid"></div>
                     <div class="letter-p-container" id="letterP"></div>
                     <div class="lego-hint" id="legoHint">Нажимайте на блоки — соберите букву П</div>
                     <div class="lego-done" id="legoDone">
-                        <p>Так мы собираем ваш сайт</p>
-                        <button onclick="resetLego()">Собрать заново</button>
+                        <p>Кирпичик за кирпичиком — так мы собираем сайты</p>
+                        <a href="#audit-form" class="lego-cta">Соберём и ваш →</a>
                     </div>
+                    <button class="lego-reset-btn" id="legoResetBtn" onclick="resetLego()" title="Собрать заново">↻</button>
                 </div>
             </div>
         </div>
@@ -1731,7 +1907,10 @@ if (stepsList) {
     steps.forEach(s => stepsObserver.observe(s));
 }
 
-// Form handler
+// Form handler — sends to Telegram bot + fallback to direct chat
+const BOT_TOKEN = 'YOUR_BOT_TOKEN';
+const CHAT_ID = 'YOUR_CHAT_ID';
+
 function handleSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('auditForm');
@@ -1739,11 +1918,19 @@ function handleSubmit(e) {
     const website = data.get('website');
     const phone = data.get('phone');
 
-    // Show success
     form.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
 
-    // Open Telegram with pre-filled message
+    const text = `🔔 Новая заявка с сайта!\n\n🌐 Сайт: ${website}\n📱 Контакт: ${phone || 'не указан'}\n📅 ${new Date().toLocaleString('ru-RU')}`;
+
+    if (BOT_TOKEN !== 'YOUR_BOT_TOKEN' && CHAT_ID !== 'YOUR_CHAT_ID') {
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' })
+        }).catch(() => {});
+    }
+
     const msg = encodeURIComponent(`Здравствуйте! Хочу бесплатный аудит сайта.\n\nСайт: ${website}\nТелефон/Telegram: ${phone || 'не указан'}`);
     setTimeout(() => {
         window.open(`https://t.me/papina_team?text=${msg}`, '_blank');
@@ -1755,25 +1942,43 @@ function handleSubmit(e) {
 // LEGO GAME
 const CELL = 45;
 const bricksData = [
-    { id: 1, type: '2x4', targetX: '0px', targetY: '0px' },
-    { id: 2, type: '2x4', targetX: '0px', targetY: '180px' },
-    { id: 3, type: '4x2', targetX: '90px', targetY: '0px' },
-    { id: 4, type: '2x2', targetX: '180px', targetY: '90px' },
-    { id: 5, type: '4x2', targetX: '90px', targetY: '180px' },
+    { id: 1, type: '4x2', targetX: '0px', targetY: '0px' },
+    { id: 2, type: '2x2', targetX: '180px', targetY: '0px' },
+    { id: 3, type: '2x4', targetX: '0px', targetY: '90px' },
+    { id: 4, type: '2x4', targetX: '180px', targetY: '90px' },
+    { id: 5, type: '2x2', targetX: '0px', targetY: '270px' },
+    { id: 6, type: '2x2', targetX: '180px', targetY: '270px' },
 ];
 
 const scatterPos = [
-    { x: -80, y: -100, rot: -12 },
-    { x: 180, y: -110, rot: 18 },
-    { x: 200, y: 50, rot: -8 },
-    { x: -90, y: 180, rot: 15 },
-    { x: 190, y: 200, rot: -20 },
+    { x: -70, y: -110, rot: -12 },
+    { x: 75, y: -100, rot: 15 },
+    { x: 90, y: 40, rot: -8 },
+    { x: -80, y: 80, rot: 14 },
+    { x: 80, y: 120, rot: -18 },
+    { x: -45, y: -15, rot: 20 },
 ];
 
 let legoBricks = [];
 let legoGhosts = [];
 let legoPlaced = 0;
 const letterP = document.getElementById('letterP');
+
+const studsGrid = document.getElementById('legoStudsGrid');
+if (studsGrid) {
+    const wrapper = document.getElementById('legoWrapper');
+    const rect = wrapper.getBoundingClientRect();
+    const cols = Math.floor((rect.width - 16) / 28);
+    const rows = Math.floor((rect.height - 16) / 28);
+    const total = cols * rows;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < total; i++) {
+        const s = document.createElement('div');
+        s.className = 'bp-stud';
+        frag.appendChild(s);
+    }
+    studsGrid.appendChild(frag);
+}
 
 function initLego() {
     if (!letterP) return;
@@ -1833,10 +2038,11 @@ function placeBrickFn(brick) {
     setTimeout(() => {
         brick.classList.add('placed');
         legoPlaced++;
-        if (legoPlaced === 5) {
+        if (legoPlaced === bricksData.length) {
             setTimeout(() => {
                 document.getElementById('legoHint').style.display = 'none';
                 document.getElementById('legoDone').classList.add('show');
+                document.getElementById('legoResetBtn').classList.add('show');
             }, 600);
         }
     }, 500);
@@ -1844,6 +2050,7 @@ function placeBrickFn(brick) {
 
 function resetLego() {
     document.getElementById('legoDone').classList.remove('show');
+    document.getElementById('legoResetBtn').classList.remove('show');
     document.getElementById('legoHint').style.display = 'block';
     legoPlaced = 0;
     legoGhosts.forEach(g => g.classList.remove('filled'));
@@ -1862,6 +2069,20 @@ function resetLego() {
 }
 
 initLego();
+
+// CASE BEFORE/AFTER SLIDER
+const caseBaRange = document.getElementById('caseBaRange');
+if (caseBaRange) {
+    const caseBaBefore = document.querySelector('.case-ba-before');
+    const caseBaAfter = document.querySelector('.case-ba-after');
+    const caseBaLine = document.getElementById('caseBaLine');
+    caseBaRange.addEventListener('input', function() {
+        const v = this.value;
+        caseBaBefore.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
+        caseBaAfter.style.clipPath = `inset(0 0 0 ${v}%)`;
+        caseBaLine.style.left = v + '%';
+    });
+}
 </script>
 
 </body>
