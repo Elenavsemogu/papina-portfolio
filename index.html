@@ -1272,7 +1272,8 @@
             pointer-events: none;
             transition: opacity 0.6s;
             z-index: 80;
-            white-space: nowrap;
+            width: 85%;
+            text-align: center;
         }
 
         .lego-done.show { opacity: 1; pointer-events: auto; }
@@ -1445,6 +1446,7 @@
             .case-card { min-width: 300px; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .letter-p-container { transform: translate(-50%, -50%) scale(0.7); }
+            .lego-wrapper { max-width: 340px; aspect-ratio: 3/4; }
         }
 
         @media (max-width: 480px) {
@@ -1453,6 +1455,7 @@
             .pricing-card { padding: 28px 20px; }
             .pricing-price { font-size: 28px; }
             .letter-p-container { transform: translate(-50%, -50%) scale(0.55); }
+            .lego-wrapper { max-width: 280px; }
             .case-ba-container { height: 260px; }
             .site-preview-card { width: calc(100vw - 56px); left: -8px; }
         }
