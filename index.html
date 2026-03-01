@@ -1261,7 +1261,6 @@
 
         .lego-done {
             position: absolute;
-            bottom: 16px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -1275,6 +1274,9 @@
             width: 85%;
             text-align: center;
         }
+
+        .lego-done-text { bottom: 56px; }
+        .lego-done-cta { bottom: 16px; }
 
         .lego-done.show { opacity: 1; pointer-events: auto; }
 
@@ -1447,7 +1449,8 @@
             .footer-bottom { flex-direction: column; text-align: center; }
             .letter-p-container { transform: translate(-50%, -50%) scale(0.7); }
             .lego-wrapper { max-width: 340px; aspect-ratio: 3/4; }
-            .lego-done { bottom: auto; top: 12px; }
+            .lego-done-text { bottom: auto; top: 12px; }
+            .lego-done-cta { bottom: 12px; }
         }
 
         @media (max-width: 480px) {
@@ -1457,7 +1460,8 @@
             .pricing-price { font-size: 28px; }
             .letter-p-container { transform: translate(-50%, -50%) scale(0.55); }
             .lego-wrapper { max-width: 280px; }
-            .lego-done { top: 8px; }
+            .lego-done-text { top: 8px; }
+            .lego-done-cta { bottom: 8px; }
             .case-ba-container { height: 260px; }
             .site-preview-card { width: calc(100vw - 56px); left: -8px; }
         }
@@ -1900,8 +1904,10 @@
                     <div class="lego-studs-grid" id="legoStudsGrid"></div>
                     <div class="letter-p-container" id="letterP"></div>
                     <div class="lego-hint" id="legoHint">Нажимайте на блоки — соберите букву П</div>
-                    <div class="lego-done" id="legoDone">
+                    <div class="lego-done lego-done-text" id="legoDoneText">
                         <p>Также мы превращаем беспорядок в работающие сайты</p>
+                    </div>
+                    <div class="lego-done lego-done-cta" id="legoDoneCta">
                         <a href="#audit-form" class="lego-cta">Соберём и ваш →</a>
                     </div>
                     <button class="lego-reset-btn" id="legoResetBtn" onclick="resetLego()" title="Собрать заново">↻</button>
@@ -2297,7 +2303,8 @@ function placeBrickFn(brick) {
         if (legoPlaced === bricksData.length) {
             setTimeout(() => {
                 document.getElementById('legoHint').style.display = 'none';
-                document.getElementById('legoDone').classList.add('show');
+                document.getElementById('legoDoneText').classList.add('show');
+                document.getElementById('legoDoneCta').classList.add('show');
                 document.getElementById('legoResetBtn').classList.add('show');
             }, 600);
         }
@@ -2305,7 +2312,8 @@ function placeBrickFn(brick) {
 }
 
 function resetLego() {
-    document.getElementById('legoDone').classList.remove('show');
+    document.getElementById('legoDoneText').classList.remove('show');
+    document.getElementById('legoDoneCta').classList.remove('show');
     document.getElementById('legoResetBtn').classList.remove('show');
     document.getElementById('legoHint').style.display = 'block';
     legoPlaced = 0;
