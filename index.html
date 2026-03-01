@@ -1037,12 +1037,7 @@
 
         .lego-studs-grid {
             position: absolute;
-            inset: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fill, 45px);
-            grid-template-rows: repeat(auto-fill, 45px);
-            justify-content: center;
-            align-content: center;
             z-index: 1;
             pointer-events: none;
         }
@@ -1764,7 +1759,7 @@
                     <div class="letter-p-container" id="letterP"></div>
                     <div class="lego-hint" id="legoHint">Нажимайте на блоки — соберите букву П</div>
                     <div class="lego-done" id="legoDone">
-                        <p>Кирпичик за кирпичиком — так мы собираем сайты</p>
+                        <p>Также мы превращаем беспорядок в работающие сайты</p>
                         <a href="#audit-form" class="lego-cta">Соберём и ваш →</a>
                     </div>
                     <button class="lego-reset-btn" id="legoResetBtn" onclick="resetLego()" title="Собрать заново">↻</button>
@@ -1968,12 +1963,20 @@ const letterP = document.getElementById('letterP');
 const studsGrid = document.getElementById('legoStudsGrid');
 if (studsGrid) {
     const wrapper = document.getElementById('legoWrapper');
-    const rect = wrapper.getBoundingClientRect();
-    const cols = Math.floor(rect.width / 45);
-    const rows = Math.floor(rect.height / 45);
-    const total = cols * rows;
+    const W = wrapper.offsetWidth;
+    const H = wrapper.offsetHeight;
+    const letterX = (W - 270) / 2;
+    const letterY = (H - 360) / 2;
+    const originX = letterX % 45;
+    const originY = letterY % 45;
+    const cols = Math.floor((W - originX) / 45);
+    const rows = Math.floor((H - originY) / 45);
+    studsGrid.style.left = originX + 'px';
+    studsGrid.style.top = originY + 'px';
+    studsGrid.style.gridTemplateColumns = 'repeat(' + cols + ', 45px)';
+    studsGrid.style.gridTemplateRows = 'repeat(' + rows + ', 45px)';
     const frag = document.createDocumentFragment();
-    for (let i = 0; i < total; i++) {
+    for (let i = 0; i < cols * rows; i++) {
         const s = document.createElement('div');
         s.className = 'bp-stud';
         frag.appendChild(s);
