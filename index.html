@@ -761,35 +761,109 @@
             font-size: 14px;
             pointer-events: none;
             font-family: inherit;
+            transition: opacity 0.2s;
         }
+
+        .audit-form .url-prefix.hidden { opacity: 0; }
 
         .audit-form .url-input-wrap input[name="website"] {
             width: 100%;
             padding-left: 80px;
         }
 
-        .site-preview {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 36px;
-            border-radius: 6px;
-            overflow: hidden;
-            opacity: 0;
-            transition: opacity 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            pointer-events: none;
+        .audit-form .url-input-wrap input[name="website"].no-prefix {
+            padding-left: 20px;
         }
 
-        .site-preview.visible { opacity: 1; }
+        .site-preview-card {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            width: 300px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(8px) scale(0.97);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+            z-index: 200;
+        }
 
-        .site-preview img {
+        .site-preview-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .site-preview-card .preview-img-wrap {
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+            background: #f5f5f5;
+            position: relative;
+        }
+
+        .site-preview-card .preview-img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: top center;
+        }
+
+        .site-preview-card .preview-img-wrap .preview-loader {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            transition: opacity 0.3s;
+        }
+
+        .site-preview-card .preview-img-wrap .preview-loader.hidden { opacity: 0; pointer-events: none; }
+
+        .preview-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e0e0e0;
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .site-preview-card .preview-info {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .site-preview-card .preview-check {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #E8F5E9;
+            color: #2E7D32;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .site-preview-card .preview-domain {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .site-preview-card .preview-hint {
+            font-size: 12px;
+            color: var(--muted);
         }
 
         .audit-form input {
@@ -1380,6 +1454,7 @@
             .pricing-price { font-size: 28px; }
             .letter-p-container { transform: translate(-50%, -50%) scale(0.55); }
             .case-ba-container { height: 260px; }
+            .site-preview-card { width: calc(100vw - 56px); left: -8px; }
         }
     </style>
 </head>
@@ -1689,9 +1764,21 @@
         </div>
         <form class="audit-form" id="auditForm" onsubmit="return handleSubmit(event)">
             <div class="url-input-wrap">
-                <span class="url-prefix">https://</span>
+                <span class="url-prefix" id="urlPrefix">https://</span>
                 <input type="text" name="website" placeholder="example.com" required autocomplete="url" inputmode="url">
-                <div class="site-preview" id="sitePreview"><img id="sitePreviewImg" alt=""></div>
+                <div class="site-preview-card" id="sitePreviewCard">
+                    <div class="preview-img-wrap">
+                        <img id="sitePreviewImg" alt="">
+                        <div class="preview-loader" id="previewLoader"><div class="preview-spinner"></div></div>
+                    </div>
+                    <div class="preview-info">
+                        <div class="preview-check">✓</div>
+                        <div>
+                            <div class="preview-domain" id="previewDomain"></div>
+                            <div class="preview-hint">Это ваш сайт? Тогда жмите «Отправить»</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <input type="tel" name="phone" placeholder="Телефон или Telegram">
             <button type="submit">Отправить →</button>
@@ -1953,32 +2040,87 @@ if (stepsList) {
     steps.forEach(s => stepsObserver.observe(s));
 }
 
-// Site preview on URL input
+// Smart URL input with live preview
 const websiteInput = document.querySelector('input[name="website"]');
-const sitePreview = document.getElementById('sitePreview');
-const sitePreviewImg = document.getElementById('sitePreviewImg');
+const previewCard = document.getElementById('sitePreviewCard');
+const previewImg = document.getElementById('sitePreviewImg');
+const previewLoader = document.getElementById('previewLoader');
+const previewDomain = document.getElementById('previewDomain');
+const urlPrefix = document.getElementById('urlPrefix');
 let previewTimer = null;
+let currentPreviewDomain = '';
 
 function normalizeDomain(val) {
-    let d = val.trim().replace(/^https?:\/\//, '').replace(/\/+$/, '');
-    return d;
+    let d = val.trim();
+    d = d.replace(/^https?:\/\//i, '');
+    d = d.replace(/^www\./i, '');
+    d = d.replace(/[\/\?#].*$/, '');
+    return d.toLowerCase();
+}
+
+function smartClean(input) {
+    let v = input.value;
+    const had = /^https?:\/\//i.test(v);
+    if (had) {
+        v = normalizeDomain(v);
+        input.value = v;
+    }
+    const show = v.length === 0 || !had;
+    urlPrefix.classList.toggle('hidden', v.length > 0 && had);
+    input.classList.toggle('no-prefix', v.length > 0 && /^https?:\/\//i.test(input.value));
 }
 
 if (websiteInput) {
+    websiteInput.addEventListener('paste', function(e) {
+        setTimeout(() => {
+            const raw = this.value;
+            if (/^https?:\/\//i.test(raw)) {
+                this.value = normalizeDomain(raw);
+            }
+            showPreview(normalizeDomain(this.value));
+        }, 0);
+    });
+
     websiteInput.addEventListener('input', function() {
         clearTimeout(previewTimer);
         const domain = normalizeDomain(this.value);
         if (domain.length > 3 && domain.includes('.')) {
-            previewTimer = setTimeout(() => {
-                const url = 'https://image.thum.io/get/width/200/https://' + domain;
-                sitePreviewImg.src = url;
-                sitePreviewImg.onload = () => sitePreview.classList.add('visible');
-                sitePreviewImg.onerror = () => sitePreview.classList.remove('visible');
-            }, 600);
+            previewTimer = setTimeout(() => showPreview(domain), 700);
         } else {
-            sitePreview.classList.remove('visible');
+            previewCard.classList.remove('visible');
+            currentPreviewDomain = '';
         }
     });
+
+    websiteInput.addEventListener('blur', function() {
+        setTimeout(() => previewCard.classList.remove('visible'), 200);
+    });
+
+    websiteInput.addEventListener('focus', function() {
+        const domain = normalizeDomain(this.value);
+        if (currentPreviewDomain && currentPreviewDomain === domain) {
+            previewCard.classList.add('visible');
+        }
+    });
+}
+
+function showPreview(domain) {
+    if (domain === currentPreviewDomain && previewCard.classList.contains('visible')) return;
+    currentPreviewDomain = domain;
+    previewDomain.textContent = domain;
+    previewLoader.classList.remove('hidden');
+    previewCard.classList.add('visible');
+    const url = 'https://image.thum.io/get/width/600/https://' + domain;
+    const img = new Image();
+    img.onload = () => {
+        previewImg.src = url;
+        previewLoader.classList.add('hidden');
+    };
+    img.onerror = () => {
+        previewCard.classList.remove('visible');
+        currentPreviewDomain = '';
+    };
+    img.src = url;
 }
 
 // Form handler — sends to Telegram bot + fallback to direct chat
