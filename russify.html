@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русификация логотипов — ПАПИНА | Кейс JZPMU</title>
+    <meta name="description" content="Переводим логотипы на кириллицу, сохраняя узнаваемость бренда. Кейс: русификация логотипа студии JZPMU.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F5F3EF;
+            --text: #1A1A1A;
+            --accent: #E8590C;
+            --accent-light: #F07020;
+            --accent-glow: rgba(232, 89, 12, 0.12);
+            --muted: #6B6B6B;
+            --card-bg: #FFFFFF;
+            --border: rgba(26, 26, 26, 0.08);
+            --radius: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 16px 32px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(245, 243, 239, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); transition: all 0.3s ease;
+        }
+        nav.scrolled { padding: 10px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+        .logo-name { font-family: 'Dela Gothic One', sans-serif; font-size: 20px; letter-spacing: 1px; }
+        .logo-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; }
+        .nav-links { display: flex; align-items: center; gap: 8px; }
+        .nav-link {
+            padding: 10px 18px; border-radius: 100px; text-decoration: none;
+            color: var(--muted); font-weight: 500; font-size: 14px; transition: all 0.2s ease;
+        }
+        .nav-link:hover { color: var(--text); }
+        .nav-cta { background: var(--text); color: var(--bg) !important; font-weight: 600; }
+
+        .section { padding: 100px 32px; position: relative; }
+        .container { max-width: 1140px; margin: 0 auto; }
+
+        .section-label {
+            font-size: 13px; font-weight: 600; color: var(--accent);
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Manrope', sans-serif; font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 20px;
+        }
+        .section-desc { font-size: 17px; color: var(--muted); max-width: 640px; line-height: 1.7; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 16px 32px; border-radius: 100px; font-weight: 600;
+            font-size: 15px; text-decoration: none; transition: all 0.2s ease; cursor: pointer; border: none; font-family: inherit;
+        }
+        .btn-primary { background: var(--text); color: var(--bg); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+        /* HERO */
+        .russify-hero {
+            padding: 140px 32px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .russify-hero h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 24px;
+        }
+        .russify-hero h1 .accent { color: var(--accent); }
+        .russify-hero .hero-sub {
+            font-size: clamp(16px, 1.6vw, 19px);
+            color: var(--muted); line-height: 1.7; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;
+        }
+
+        /* CASE STUDY */
+        .case-header {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+            align-items: center; margin-top: 48px;
+        }
+        .logo-compare {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+        }
+        .logo-box {
+            border-radius: var(--radius); padding: 48px 32px; min-height: 200px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+        }
+        .logo-box img { max-width: 160px; height: auto; }
+        .logo-box--before { background: #2A2A2A; }
+        .logo-box--after { background: var(--card-bg); border: 1px solid var(--border); }
+        .logo-box-label {
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+        }
+        .logo-box--before .logo-box-label { color: rgba(255,255,255,0.5); }
+        .logo-box--after .logo-box-label { color: var(--accent); }
+
+        .case-text h3 {
+            font-family: 'Manrope', sans-serif; font-size: 28px; font-weight: 800;
+            margin-bottom: 16px; line-height: 1.3;
+        }
+        .case-text p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
+        .case-text p strong { color: var(--text); font-weight: 600; }
+
+        /* PROCESS */
+        .process-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; margin-top: 48px;
+        }
+        .process-step {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 32px 24px; text-align: center;
+        }
+        .process-step-num {
+            font-family: 'Manrope', sans-serif; font-size: 36px; font-weight: 800;
+            color: rgba(232,89,12,0.15); margin-bottom: 12px;
+        }
+        .process-step h3 {
+            font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px;
+        }
+        .process-step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+        /* WHY */
+        .why-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; margin-top: 48px;
+        }
+        .why-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 32px 24px;
+        }
+        .why-card h3 {
+            font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 8px;
+        }
+        .why-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+        /* CTA */
+        .cta-strip {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white; text-align: center;
+        }
+        .cta-strip .section-title { color: white; }
+        .cta-strip .section-desc { color: rgba(255,255,255,0.9); margin: 0 auto 32px; }
+
+        /* FOOTER */
+        footer {
+            background: var(--text); color: rgba(255,255,255,0.7); padding: 40px 32px;
+        }
+        .footer-inner {
+            max-width: 1140px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px;
+        }
+        .footer-inner .logo-name { color: white; font-size: 18px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-legal { font-size: 13px; color: rgba(255,255,255,0.4); width: 100%; text-align: center; margin-top: 16px; }
+
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .case-header { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 12px 16px; }
+            .nav-link:not(.nav-cta) { display: none; }
+            .logo-name { font-size: 17px; }
+            .section { padding: 72px 20px; }
+            .russify-hero { padding: 100px 20px 48px; }
+            .logo-compare { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <a href="index.html" class="logo">
+        <span class="logo-name">ПАПИНА</span>
+        <span class="logo-dot"></span>
+    </a>
+    <div class="nav-links">
+        <a href="studio.html" class="nav-link">Студия</a>
+        <a href="index.html#cases" class="nav-link">Кейсы</a>
+        <a href="https://t.me/Elen_just_Elen" target="_blank" rel="noopener" class="nav-link nav-cta">Обсудить проект</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="russify-hero">
+    <a href="studio.html" style="display:inline-block;margin-bottom:20px;color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">← Все услуги</a>
+    <h1>Русификация <span class="accent">логотипов</span></h1>
+    <p class="hero-sub">Переводим бренд на кириллицу так, чтобы он остался узнаваемым. Не просто набираем буквы похожим шрифтом — создаём новую типографику, сохраняя ДНК оригинала.</p>
+</section>
+
+<!-- CASE: JZPMU -->
+<section class="section" style="background:var(--card-bg);">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Кейс</p>
+            <h2 class="section-title">JZPMU → кириллица</h2>
+            <p class="section-desc">Студия перманентного макияжа Юлии Заматаевой. Бренд работал на латинице, а 100% клиентов — русскоязычные.</p>
+        </div>
+        <div class="case-header reveal">
+            <div class="logo-compare">
+                <div class="logo-box logo-box--before">
+                    <img src="russify-jzpmu-before.svg" alt="JZPMU — старый логотип">
+                    <span class="logo-box-label">Было</span>
+                </div>
+                <div class="logo-box logo-box--after">
+                    <img src="russify-jzpmu-after.svg" alt="JZPMU — новый логотип">
+                    <span class="logo-box-label">Стало</span>
+                </div>
+            </div>
+            <div class="case-text">
+                <h3>Проблема: логотип не запоминается</h3>
+                <p>Аббревиатура <strong>JZPMU</strong> — пять латинских букв, которые невозможно прочитать по-русски. Клиенты не могли назвать студию, найти её в поиске, порекомендовать друзьям.</p>
+                <p><strong>Решение:</strong> мы разработали новый логотип на кириллице, сохранив узнаваемые элементы: золотистую палитру, элегантный характер шрифта и аббревиатуру как акцент.</p>
+                <p>Дополнительно создали <strong>полный брендбук</strong> с правилами использования, палитрой, типографикой и гайдлайнами — в формате, который можно сразу отправить любому подрядчику.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Как это работает</p>
+            <h2 class="section-title">Четыре шага к русскому логотипу</h2>
+        </div>
+        <div class="process-grid">
+            <div class="process-step reveal">
+                <div class="process-step-num">01</div>
+                <h3>Анализ бренда</h3>
+                <p>Изучаем оригинальный логотип: шрифт, пропорции, характер. Определяем, что делает его узнаваемым.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-num">02</div>
+                <h3>Варианты</h3>
+                <p>Готовим 3-5 концепций русификации. Показываем, как бренд может выглядеть на кириллице — с пояснениями.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-num">03</div>
+                <h3>Доработка</h3>
+                <p>Выбираем лучший вариант и доводим: кернинг, пропорции, версии для разных размеров и фонов.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-num">04</div>
+                <h3>Комплект</h3>
+                <p>Отдаём: SVG, PNG, PDF + брендбук с правилами. Всё готово для печати, сайта и соцсетей.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY -->
+<section class="section" style="background:var(--card-bg);">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Зачем это нужно</p>
+            <h2 class="section-title">Три причины русифицировать логотип</h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <h3>Запоминаемость</h3>
+                <p>Люди запоминают то, что могут прочитать. Кириллический логотип проще назвать, найти в поиске, передать «из уст в уста».</p>
+            </div>
+            <div class="why-card reveal">
+                <h3>Доверие</h3>
+                <p>Бренд на родном языке воспринимается как «свой». Это особенно важно для локального бизнеса и услуг.</p>
+            </div>
+            <div class="why-card reveal">
+                <h3>SEO и поиск</h3>
+                <p>Русскоязычные запросы — 95% поиска в рунете. Если название бренда на латинице, его просто не найдут.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-strip">
+    <div class="container reveal">
+        <h2 class="section-title">Хотите русифицировать свой логотип?</h2>
+        <p class="section-desc">Пришлите текущий логотип в Telegram — покажем, как он может выглядеть на кириллице. Первый вариант — бесплатно.</p>
+        <a href="https://t.me/Elen_just_Elen" target="_blank" rel="noopener" class="btn btn-primary" style="background:white;color:var(--accent);">Написать в Telegram →</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <span class="logo-name" style="font-family:'Dela Gothic One',sans-serif;">ПАПИНА<span class="logo-dot" style="margin-left:4px;"></span></span>
+        <div class="footer-links">
+            <a href="index.html">Главная</a>
+            <a href="studio.html">Студия</a>
+            <a href="index.html#cases">Кейсы</a>
+            <a href="https://t.me/Elen_just_Elen" target="_blank" rel="noopener">Telegram</a>
+        </div>
+        <div class="footer-legal">
+            ИП Папина Елена Алексеевна &middot; ОГРНИП 319222500023811 &middot; ИНН 645485103174<br>
+            © 2026 ПАПИНА. Все права защищены.
+        </div>
+    </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>

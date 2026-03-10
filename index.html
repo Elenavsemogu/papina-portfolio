@@ -1530,6 +1530,7 @@
         <a href="#solution" class="nav-link">Как работаем</a>
         <a href="#pricing" class="nav-link">Тарифы</a>
         <a href="#cases" class="nav-link">Кейсы</a>
+        <a href="studio.html" class="nav-link">Студия</a>
         <a href="#audit-form" class="nav-link nav-cta">Бесплатный аудит</a>
     </div>
 </nav>
@@ -1870,13 +1871,43 @@
         <div class="cases-scroll" style="margin-top:40px;">
             <div class="case-card reveal" style="min-width:420px;max-width:520px;">
                 <div class="case-visual" style="height:auto;padding:0;">
-                    <div class="case-ba-container" id="caseBaContainer">
-                        <img class="case-ba-before" src="case-jzpmu-before.jpg" alt="Сайт до редизайна">
-                        <img class="case-ba-after" src="case-jzpmu-after.jpg" alt="Сайт после редизайна">
-                        <div class="case-ba-slider-line" id="caseBaLine"></div>
+                    <div class="case-ba-container" data-ba="preo">
+                        <img class="case-ba-before" src="case-preo-before.jpg" alt="Преображение — до">
+                        <img class="case-ba-after" src="case-preo-after.jpg" alt="Преображение — после">
+                        <div class="case-ba-slider-line"></div>
                         <span class="case-ba-label case-ba-label-before">До</span>
                         <span class="case-ba-label case-ba-label-after">После</span>
-                        <input type="range" min="0" max="100" value="50" class="case-ba-range" id="caseBaRange">
+                        <input type="range" min="0" max="100" value="50" class="case-ba-range">
+                    </div>
+                </div>
+                <div class="case-body">
+                    <div class="case-name">Преображение — социальный проект</div>
+                    <div class="case-desc">С одностраничника на конструкторе — в полноценный сайт с видео-героем, scroll-анимациями, брендбуком и 4 страницами.</div>
+                    <div class="case-metrics">
+                        <div class="case-metric">
+                            <span class="case-metric-value sm">Tilda → код</span>
+                            <span class="case-metric-label">Миграция</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">4</span>
+                            <span class="case-metric-label">Страницы</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">14</span>
+                            <span class="case-metric-label">Спонсоров</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-card reveal" style="min-width:420px;max-width:520px;">
+                <div class="case-visual" style="height:auto;padding:0;">
+                    <div class="case-ba-container" data-ba="jzpmu">
+                        <img class="case-ba-before" src="case-jzpmu-before.jpg" alt="Сайт до редизайна">
+                        <img class="case-ba-after" src="case-jzpmu-after.jpg" alt="Сайт после редизайна">
+                        <div class="case-ba-slider-line"></div>
+                        <span class="case-ba-label case-ba-label-before">До</span>
+                        <span class="case-ba-label case-ba-label-after">После</span>
+                        <input type="range" min="0" max="100" value="50" class="case-ba-range">
                     </div>
                 </div>
                 <div class="case-body">
@@ -1940,6 +1971,18 @@
     </div>
 </section>
 
+<!-- STUDIO BANNER -->
+<section class="section" style="background:var(--text);padding:60px 32px;">
+    <div class="container reveal" style="display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+        <div style="max-width:600px;">
+            <p style="font-size:13px;font-weight:600;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Больше, чем редизайн</p>
+            <h2 style="font-family:'Manrope',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:800;color:white;line-height:1.3;margin-bottom:12px;">Сайты под ключ, брендинг, русификация логотипов</h2>
+            <p style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.7;">Полный цикл: от идеи до запуска. С интеграцией CRM-систем, брендбуками и текстами, которые продают.</p>
+        </div>
+        <a href="studio.html" class="btn btn-primary" style="background:var(--accent);color:white;font-size:16px;padding:18px 36px;white-space:nowrap;">ПАПА сайт →</a>
+    </div>
+</section>
+
 <!-- EMPATHY + LEGO -->
 <section class="section empathy-section" id="empathy">
     <div class="container">
@@ -1985,6 +2028,8 @@
             <a href="#solution">Как работаем</a>
             <a href="#pricing">Тарифы</a>
             <a href="#cases">Кейсы</a>
+            <a href="studio.html">Студия полного цикла</a>
+            <a href="russify.html">Русификация логотипов</a>
             <a href="#audit-form">Бесплатный аудит</a>
         </div>
         <div class="footer-col">
@@ -2392,19 +2437,20 @@ function resetLego() {
 
 initLego();
 
-// CASE BEFORE/AFTER SLIDER
-const caseBaRange = document.getElementById('caseBaRange');
-if (caseBaRange) {
-    const caseBaBefore = document.querySelector('.case-ba-before');
-    const caseBaAfter = document.querySelector('.case-ba-after');
-    const caseBaLine = document.getElementById('caseBaLine');
-    caseBaRange.addEventListener('input', function() {
+// CASE BEFORE/AFTER SLIDERS (multiple)
+document.querySelectorAll('.case-ba-container').forEach(container => {
+    const range = container.querySelector('.case-ba-range');
+    if (!range) return;
+    const before = container.querySelector('.case-ba-before');
+    const after = container.querySelector('.case-ba-after');
+    const line = container.querySelector('.case-ba-slider-line');
+    range.addEventListener('input', function() {
         const v = this.value;
-        caseBaBefore.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
-        caseBaAfter.style.clipPath = `inset(0 0 0 ${v}%)`;
-        caseBaLine.style.left = v + '%';
+        before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
+        after.style.clipPath = `inset(0 0 0 ${v}%)`;
+        line.style.left = v + '%';
     });
-}
+});
 </script>
 
 </body>

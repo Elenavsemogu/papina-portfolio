@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПАПИНА — Веб-студия полного цикла | Сайты, брендинг, русификация логотипов</title>
+    <meta name="description" content="Веб-студия ПАПИНА: сайты под ключ с интеграцией CRM, ребрендинг, русификация логотипов, брендбуки. Бережный подход к каждому проекту.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F5F3EF;
+            --text: #1A1A1A;
+            --accent: #E8590C;
+            --accent-light: #F07020;
+            --accent-glow: rgba(232, 89, 12, 0.12);
+            --muted: #6B6B6B;
+            --card-bg: #FFFFFF;
+            --border: rgba(26, 26, 26, 0.08);
+            --radius: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(245, 243, 239, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        nav.scrolled { padding: 10px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+        .logo-name { font-family: 'Dela Gothic One', sans-serif; font-size: 20px; letter-spacing: 1px; }
+        .logo-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; }
+
+        .nav-links { display: flex; align-items: center; gap: 8px; }
+        .nav-link {
+            padding: 10px 18px; border-radius: 100px; text-decoration: none;
+            color: var(--muted); font-weight: 500; font-size: 14px; transition: all 0.2s ease;
+        }
+        .nav-link:hover { color: var(--text); }
+        .nav-cta { background: var(--text); color: var(--bg) !important; font-weight: 600; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+        .section { padding: 100px 32px; position: relative; }
+        .container { max-width: 1140px; margin: 0 auto; }
+
+        .section-label {
+            font-size: 13px; font-weight: 600; color: var(--accent);
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Manrope', sans-serif; font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 20px;
+        }
+        .section-desc { font-size: 17px; color: var(--muted); max-width: 640px; line-height: 1.7; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 16px 32px; border-radius: 100px; font-weight: 600;
+            font-size: 15px; text-decoration: none; transition: all 0.2s ease; cursor: pointer; border: none; font-family: inherit;
+        }
+        .btn-primary { background: var(--text); color: var(--bg); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        .btn-secondary { background: transparent; color: var(--text); border: 2px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--text); }
+        .btn-accent { background: var(--accent); color: #fff; }
+        .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,89,12,0.3); }
+
+        /* HERO */
+        .studio-hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 32px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .studio-hero h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(32px, 5vw, 60px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
+        .studio-hero h1 .accent { color: var(--accent); }
+        .studio-hero .hero-sub {
+            font-size: clamp(16px, 1.8vw, 20px);
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 640px;
+        }
+        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+        /* SERVICES GRID */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+        .service-card.featured { border: 2px solid var(--accent); }
+        .service-num {
+            font-family: 'Manrope', sans-serif; font-size: 48px; font-weight: 800;
+            color: rgba(232,89,12,0.1); line-height: 1; margin-bottom: 16px;
+        }
+        .service-card h3 {
+            font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 12px;
+        }
+        .service-card p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+        .service-card .price-tag {
+            display: inline-block; margin-top: 16px; padding: 6px 16px;
+            background: var(--accent-glow); border-radius: 100px; font-size: 14px;
+            font-weight: 600; color: var(--accent);
+        }
+        .service-link {
+            display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+            font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none;
+        }
+        .service-link:hover { text-decoration: underline; }
+
+        /* PAIN POINTS */
+        .pain-section { background: var(--text); color: white; }
+        .pain-section .section-label { color: var(--accent); }
+        .pain-section .section-title { color: white; }
+        .pain-section .section-desc { color: rgba(255,255,255,0.7); }
+        .pain-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; margin-top: 48px;
+        }
+        .pain-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+        }
+        .pain-card h3 {
+            font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700;
+            color: white; margin-bottom: 8px;
+        }
+        .pain-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+        .pain-card .pain-icon {
+            font-size: 28px; margin-bottom: 12px; display: block;
+        }
+
+        /* APPROACH */
+        .approach-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center; margin-top: 48px;
+        }
+        .approach-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+        .approach-list li {
+            display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start;
+        }
+        .approach-num {
+            width: 48px; height: 48px; border-radius: 14px;
+            background: var(--accent-glow); display: flex; align-items: center; justify-content: center;
+            font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 18px; color: var(--accent);
+        }
+        .approach-list h4 {
+            font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 4px;
+        }
+        .approach-list p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+        .approach-quote {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 48px 40px;
+            position: relative;
+        }
+        .approach-quote blockquote {
+            font-family: 'Manrope', sans-serif; font-size: 22px; font-weight: 600;
+            line-height: 1.5; margin-bottom: 20px;
+        }
+        .approach-quote cite {
+            font-style: normal; font-size: 14px; color: var(--muted);
+        }
+        .approach-quote::before {
+            content: '\201C'; position: absolute; top: 20px; left: 24px;
+            font-size: 72px; color: var(--accent); opacity: 0.2; line-height: 1;
+            font-family: 'Manrope', sans-serif; font-weight: 800;
+        }
+
+        /* BRANDING SHOWCASE */
+        .brand-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; margin-top: 48px;
+        }
+        .brand-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .brand-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+        .brand-card-img {
+            height: 200px; background: linear-gradient(135deg, #f0ebe4, #e8e3dc);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .brand-card-body { padding: 24px; }
+        .brand-card h3 {
+            font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 8px;
+        }
+        .brand-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white; text-align: center;
+        }
+        .cta-section .section-label { color: rgba(255,255,255,0.8); }
+        .cta-section .section-title { color: white; }
+        .cta-section .section-desc { color: rgba(255,255,255,0.9); margin: 0 auto 32px; }
+
+        /* FOOTER */
+        footer {
+            background: var(--text); color: rgba(255,255,255,0.7); padding: 40px 32px;
+        }
+        .footer-inner {
+            max-width: 1140px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px;
+        }
+        .footer-inner .logo-name { color: white; font-size: 18px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-legal { font-size: 13px; color: rgba(255,255,255,0.4); width: 100%; text-align: center; margin-top: 16px; }
+
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .pain-grid { grid-template-columns: 1fr; }
+            .approach-grid { grid-template-columns: 1fr; }
+            .brand-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 12px 16px; }
+            .nav-link:not(.nav-cta) { display: none; }
+            .logo-name { font-size: 17px; }
+            .section { padding: 72px 20px; }
+            .studio-hero { min-height: auto; padding: 100px 20px 48px; }
+            .hero-btns { flex-direction: column; }
+            .hero-btns .btn { width: 100%; justify-content: center; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <a href="index.html" class="logo">
+        <span class="logo-name">ПАПИНА</span>
+        <span class="logo-dot"></span>
+    </a>
+    <div class="nav-links">
+        <a href="#services" class="nav-link">Услуги</a>
+        <a href="#approach" class="nav-link">Подход</a>
+        <a href="russify.html" class="nav-link">Русификация лого</a>
+        <a href="#cta" class="nav-link nav-cta">Обсудить проект</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="studio-hero">
+    <p class="section-label">Веб-студия полного цикла</p>
+    <h1>Не просто сайт.<br>А <span class="accent">инструмент</span>,<br>который работает на вас</h1>
+    <p class="hero-sub">Делаем сайты, которые приводят клиентов. Создаём бренды, которые запоминаются. Русифицируем логотипы, чтобы бизнес говорил на языке аудитории.</p>
+    <div class="hero-btns">
+        <a href="#cta" class="btn btn-primary">Обсудить проект →</a>
+        <a href="index.html#cases" class="btn btn-secondary">Посмотреть кейсы</a>
+    </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="section pain-section">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Знакомо?</p>
+            <h2 class="section-title">Почему владельцы бизнеса<br>обращаются к нам</h2>
+        </div>
+        <div class="pain-grid">
+            <div class="pain-card reveal">
+                <span class="pain-icon">📉</span>
+                <h3>Сайт есть, а клиентов нет</h3>
+                <p>Реклама крутится, деньги уходят, а заявок — по пальцам. Проблема не в рекламе. Проблема в сайте: он не убеждает, не ведёт за руку, не доводит до кнопки.</p>
+            </div>
+            <div class="pain-card reveal">
+                <span class="pain-icon">🧩</span>
+                <h3>Конструктор упёрся в потолок</h3>
+                <p>Tilda, Wix, Squarespace — отлично на старте. Но бизнес вырос, а возможности конструктора — нет. CRM не подключается, аналитика не настраивается, дизайн ограничен шаблонами.</p>
+            </div>
+            <div class="pain-card reveal">
+                <span class="pain-icon">🌐</span>
+                <h3>Логотип не читается по-русски</h3>
+                <p>Бренд пришёл из-за рубежа или изначально на латинице, а 90% клиентов — русскоязычные. Логотип не узнают, не запоминают, не ищут.</p>
+            </div>
+            <div class="pain-card reveal">
+                <span class="pain-icon">🎨</span>
+                <h3>Нет единого стиля</h3>
+                <p>Соцсети — в одном стиле, сайт — в другом, визитки — вообще отдельная история. Бренд выглядит как набор разрозненных кусков, а не как цельная система.</p>
+            </div>
+            <div class="pain-card reveal">
+                <span class="pain-icon">⏳</span>
+                <h3>Прошлый разработчик пропал</h3>
+                <p>Знакомая история: отдали проект фрилансеру, он сделал 60%, ушёл и не отвечает. Доделывать дороже, чем начинать заново.</p>
+            </div>
+            <div class="pain-card reveal">
+                <span class="pain-icon">💸</span>
+                <h3>Дорого, а результат не виден</h3>
+                <p>Заплатили агентству 300 000 ₽, получили красивый макет и... тишину. Ни роста трафика, ни заявок, ни понимания, за что заплачены деньги.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Что мы делаем</p>
+            <h2 class="section-title">Четыре направления.<br>Одна цель — ваш рост.</h2>
+            <p class="section-desc">Каждый проект — от 14 дней. Каждый начинается с бесплатного аудита и прототипа, который вы видите до оплаты.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-num">01</div>
+                <h3>Сайты под ключ</h3>
+                <p>Многостраничные сайты с интеграцией CRM-системы, аналитикой и автоматизацией. Не шаблон на конструкторе, а чистый код, который загружается за 1,5 секунды и адаптирован под любое устройство.</p>
+                <span class="price-tag">от 50 000 ₽</span>
+            </div>
+            <div class="service-card featured reveal">
+                <div class="service-num">02</div>
+                <h3>Ребрендинг и редизайн</h3>
+                <p>Берём ваш существующий сайт и аккуратно обновляем: дизайн, скорость, SEO, мобильную версию. Вы видите прототип через 3 дня — до того, как заплатите хоть рубль.</p>
+                <span class="price-tag">от 25 000 ₽</span>
+                <br>
+                <a href="index.html" class="service-link">Подробнее о редизайне →</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-num">03</div>
+                <h3>Русификация логотипов</h3>
+                <p>Переводим бренд на кириллицу так, чтобы он остался узнаваемым. Не просто набираем буквы — создаём новую типографику, сохраняя ДНК оригинала.</p>
+                <span class="price-tag">от 15 000 ₽</span>
+                <br>
+                <a href="russify.html" class="service-link">Кейс: JZPMU →</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-num">04</div>
+                <h3>Брендинг и брендбуки</h3>
+                <p>Полный комплект: логотип, цвета, типографика, правила использования. Отдаём в формате, который можно отправить дизайнеру, типографии или SMM-менеджеру — и всё будет единообразно.</p>
+                <span class="price-tag">от 30 000 ₽</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APPROACH -->
+<section class="section" style="background:var(--card-bg);" id="approach">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Почему с нами удобно</p>
+            <h2 class="section-title">Бережный подход к каждому проекту</h2>
+            <p class="section-desc">Мы не агентство на 50 человек. Мы — компактная команда, где каждый проект ведёт один человек. Это значит: один контакт, никаких «передайте менеджеру».</p>
+        </div>
+        <div class="approach-grid">
+            <ul class="approach-list reveal">
+                <li>
+                    <div class="approach-num">1</div>
+                    <div>
+                        <h4>Сначала показываем, потом берём деньги</h4>
+                        <p>Прототип нового дизайна — за 3 дня и бесплатно. Нравится — продолжаем. Нет — расходимся без обид.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="approach-num">2</div>
+                    <div>
+                        <h4>Пишем так, чтобы продавало</h4>
+                        <p>Тексты на сайте — не рыба «Lorem ipsum», а настоящий копирайтинг. Короткий, точный, без воды. Каждое предложение работает на конверсию.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="approach-num">3</div>
+                    <div>
+                        <h4>Не бросаем после запуска</h4>
+                        <p>Следим за метриками, помогаем с контентом, правим мелочи. Вы не остаётесь одни с непонятным кодом.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="approach-num">4</div>
+                    <div>
+                        <h4>Говорим по-человечески</h4>
+                        <p>Без «синергии», «уникальных решений» и «инновационных подходов». Объясняем просто, отвечаем быстро, делаем как договорились.</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="approach-quote reveal">
+                <blockquote>Хороший сайт — это не тот, который нравится дизайнеру. А тот, после которого клиент нажимает «купить».</blockquote>
+                <cite>— Принцип, которым мы руководствуемся в каждом проекте</cite>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BRANDING EXAMPLES -->
+<section class="section" id="branding">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Как мы отдаём проекты</p>
+            <h2 class="section-title">Не просто файлы. А полный комплект.</h2>
+            <p class="section-desc">Каждый клиент получает не папку с файлами, а готовую систему: брендбук, гайдлайны и все материалы в удобном формате.</p>
+        </div>
+        <div class="brand-grid">
+            <div class="brand-card reveal">
+                <div class="brand-card-img" style="background:linear-gradient(135deg,#3E3B36,#2A2A2A);">
+                    <div style="text-align:center;color:white;">
+                        <div style="font-family:'Dela Gothic One',sans-serif;font-size:24px;letter-spacing:2px;">JZPMU</div>
+                        <div style="font-size:12px;opacity:0.6;margin-top:4px;">Брендбук</div>
+                    </div>
+                </div>
+                <div class="brand-card-body">
+                    <h3>Студия JZPMU</h3>
+                    <p>Полный ребрендинг: русификация логотипа, новая цветовая палитра, брендбук с правилами использования.</p>
+                </div>
+            </div>
+            <div class="brand-card reveal">
+                <div class="brand-card-img" style="background:linear-gradient(135deg,#E8D5F0,#D0B8E0);">
+                    <div style="text-align:center;color:#3E3B36;">
+                        <div style="font-size:16px;letter-spacing:4px;font-weight:700;">ПРЕОБРАЖЕНИЕ</div>
+                        <div style="font-size:12px;opacity:0.6;margin-top:4px;">Сайт + брендбук</div>
+                    </div>
+                </div>
+                <div class="brand-card-body">
+                    <h3>Преображение</h3>
+                    <p>Сайт с нуля: 4 страницы, видео-герой, scroll-анимации, карусели, брендбук, интеграция с Google Sheets.</p>
+                </div>
+            </div>
+            <div class="brand-card reveal">
+                <div class="brand-card-img" style="background:linear-gradient(135deg,var(--accent),var(--accent-light));">
+                    <div style="text-align:center;color:white;">
+                        <div style="font-family:'Dela Gothic One',sans-serif;font-size:24px;">ПАПИНА</div>
+                        <div style="font-size:12px;opacity:0.8;margin-top:4px;">Этот сайт</div>
+                    </div>
+                </div>
+                <div class="brand-card-body">
+                    <h3>papina.team</h3>
+                    <p>Собственный сайт: стратегия, копирайтинг, SEO-оптимизация, адаптивная вёрстка, интерактивные элементы.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="cta">
+    <div class="container reveal">
+        <p class="section-label">Начать</p>
+        <h2 class="section-title">Расскажите о вашем проекте</h2>
+        <p class="section-desc">Напишите в Telegram — обсудим задачу, покажем релевантные кейсы и предложим решение. Без давления и обязательств.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="https://t.me/Elen_just_Elen" target="_blank" rel="noopener" class="btn btn-primary" style="background:white;color:var(--accent);">Написать в Telegram →</a>
+            <a href="index.html#audit-form" class="btn btn-secondary" style="border-color:rgba(255,255,255,0.3);color:white;">Бесплатный аудит сайта</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <span class="logo-name" style="font-family:'Dela Gothic One',sans-serif;">ПАПИНА<span class="logo-dot" style="margin-left:4px;"></span></span>
+        <div class="footer-links">
+            <a href="index.html">Главная</a>
+            <a href="index.html#cases">Кейсы</a>
+            <a href="russify.html">Русификация лого</a>
+            <a href="https://t.me/Elen_just_Elen" target="_blank" rel="noopener">Telegram</a>
+        </div>
+        <div class="footer-legal">
+            ИП Папина Елена Алексеевна &middot; ОГРНИП 319222500023811 &middot; ИНН 645485103174<br>
+            © 2026 ПАПИНА. Все права защищены.
+        </div>
+    </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
