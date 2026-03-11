@@ -294,10 +294,12 @@
 <body>
 
 <nav id="nav">
-    <a href="index.html" class="logo">
-        <span class="logo-name">ПАПИНА</span>
-        <span class="logo-dot"></span>
-        <span style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-left:2px;">конструкторская</span>
+    <a href="index.html" class="logo" style="flex-direction:column;align-items:flex-start;gap:0;">
+        <span style="display:flex;align-items:center;gap:8px;">
+            <span class="logo-name">ПАПИНА</span>
+            <span class="logo-dot"></span>
+        </span>
+        <span style="font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--muted);line-height:1;margin-top:2px;">конструкторская</span>
     </a>
     <div class="nav-links">
         <a href="#services" class="nav-link">Услуги</a>
@@ -513,7 +515,10 @@
 <!-- FOOTER -->
 <footer>
     <div class="footer-inner">
-        <span class="logo-name" style="font-family:'Dela Gothic One',sans-serif;">ПАПИНА<span class="logo-dot" style="margin-left:4px;"></span></span>
+        <div style="display:flex;flex-direction:column;">
+            <span class="logo-name" style="font-family:'Dela Gothic One',sans-serif;display:flex;align-items:center;gap:4px;">ПАПИНА<span class="logo-dot"></span></span>
+            <span style="font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:2px;">конструкторская</span>
+        </div>
         <div class="footer-links">
             <a href="index.html">Главная</a>
             <a href="index.html#cases">Кейсы</a>
