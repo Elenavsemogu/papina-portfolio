@@ -1,13 +1,11 @@
-<svg width="144" height="144" viewBox="0 0 144 144" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="gradient-icon" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF4D00"/>
-      <stop offset="100%" stop-color="#FF6B35"/>
-    </linearGradient>
-  </defs>
-  <rect x="8" y="8" width="128" height="128" rx="32" fill="url(#gradient-icon)"/>
-  <text x="72" y="98" font-family="Arial Black, sans-serif" font-size="82" font-weight="900" fill="white" text-anchor="middle">П</text>
-  <circle cx="128" cy="16" r="16" fill="#FF4D00" stroke="#F5F3EF" stroke-width="6">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
-  </circle>
+<svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M103 11.7679C98 24.5 110 41.5 127.232 36C127.735 38.253 128 40.5955 128 43V107C128 124.673 113.673 139 96 139H32C14.3269 139 0 124.673 0 107V43C0 25.3269 14.3269 11 32 11H96C98.4045 11 100.747 11.2652 103 11.7679Z" fill="url(#paint0_linear_6_11)"/>
+<path d="M97.6405 46.468C97.2578 55.7067 97.0665 65.6287 97.0665 76.234C97.0665 86.8393 97.2578 96.7613 97.6405 106H78.3705V63.032H50.6545V106H31.3845C31.8218 95.3947 32.0405 85.4727 32.0405 76.234C32.0405 66.9953 31.8218 57.0733 31.3845 46.468H97.6405Z" fill="white"/>
+<circle cx="120" cy="19" r="16" fill="#FF4D00" stroke="#F5F3EF" stroke-width="6"><animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/></circle>
+<defs>
+<linearGradient id="paint0_linear_6_11" x1="0" y1="11" x2="12800" y2="12811" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF4D00"/>
+<stop offset="1" stop-color="#FF6B35"/>
+</linearGradient>
+</defs>
 </svg>
