@@ -1,7 +1,7 @@
 <svg width="32" height="32" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M103 11.7679C98 24.5 110 41.5 127.232 36C127.735 38.253 128 40.5955 128 43V107C128 124.673 113.673 139 96 139H32C14.3269 139 0 124.673 0 107V43C0 25.3269 14.3269 11 32 11H96C98.4045 11 100.747 11.2652 103 11.7679Z" fill="url(#paint0_linear_6_11)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M102.5 11.5C96.5 26 109.5 43 127.5 36.5C128.003 38.753 128 40.5955 128 43V107C128 124.673 113.673 139 96 139H32C14.3269 139 0 124.673 0 107V43C0 25.3269 14.3269 11 32 11H96C98.4045 11 100.247 10.9973 102.5 11.5Z" fill="url(#paint0_linear_6_11)"/>
 <path d="M97.6405 46.468C97.2578 55.7067 97.0665 65.6287 97.0665 76.234C97.0665 86.8393 97.2578 96.7613 97.6405 106H78.3705V63.032H50.6545V106H31.3845C31.8218 95.3947 32.0405 85.4727 32.0405 76.234C32.0405 66.9953 31.8218 57.0733 31.3845 46.468H97.6405Z" fill="white"/>
-<circle cx="120" cy="19" r="16" fill="#FF4D00" stroke="#F5F3EF" stroke-width="6"><animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/></circle>
+<path d="M120 35C128.837 35 136 27.8366 136 19C136 10.1634 128.837 3 120 3C111.163 3 104 10.1634 104 19C104 27.8366 111.163 35 120 35Z" fill="#FF4D00" stroke="white" stroke-width="6"><animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/></path>
 <defs>
 <linearGradient id="paint0_linear_6_11" x1="0" y1="11" x2="12800" y2="12811" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FF4D00"/>
