@@ -1,0 +1,13 @@
+name = "papina-max-bot"
+main = "cloudflare-worker.js"
+compatibility_date = "2026-05-29"
+
+workers_dev = true
+
+[vars]
+SITE_ORIGINS = "https://papina.team,http://localhost:8000,http://127.0.0.1:8000"
+OPERATOR_USER_ID = "34533394"
+
+[[kv_namespaces]]
+binding = "PAPINA_BOT_STATE"
+id = "18890d9aba1a4974ba8be69412e7d9d1"

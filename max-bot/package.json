@@ -1,0 +1,20 @@
+{
+  "name": "papina-max-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "poll": "node src/server.js --poll",
+    "cf:login": "npx wrangler login",
+    "cf:kv": "npx wrangler kv namespace create PAPINA_BOT_STATE",
+    "cf:deploy": "npx wrangler deploy",
+    "cf:tail": "npx wrangler tail",
+    "subscribe": "node scripts/subscribe-webhook.js",
+    "send-test": "node scripts/send-test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

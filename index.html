@@ -2298,11 +2298,12 @@ function showPreview(domain) {
     img.src = url;
 }
 
-// Form handler — sends to Telegram bot + fallback to direct chat
-const BOT_TOKEN = '8715180756:AAF1IpKYR8knB6YRyWX5eXQId9laVoJue_s';
-const CHAT_ID = '473640248';
+// Form handler: sends leads to the private backend.
+// Set window.PAPINA_BOT_API_URL on production, for example:
+// window.PAPINA_BOT_API_URL = 'https://bot.example.com';
+const BOT_API_URL = window.PAPINA_BOT_API_URL || 'https://papina-max-bot.papina.workers.dev';
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
     if (!document.getElementById('consentCheck').checked) {
         alert('Пожалуйста, дайте согласие на обработку персональных данных');
@@ -2313,24 +2314,40 @@ function handleSubmit(e) {
     const rawSite = data.get('website');
     const website = 'https://' + normalizeDomain(rawSite);
     const phone = data.get('phone');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Отправляем...';
+    }
+
+    let sentToBackend = false;
+    if (BOT_API_URL) {
+        try {
+            const response = await fetch(`${BOT_API_URL.replace(/\/$/, '')}/api/lead`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    website,
+                    contact: phone || '',
+                    page: window.location.href
+                })
+            });
+            sentToBackend = response.ok;
+        } catch (error) {
+            sentToBackend = false;
+        }
+    }
 
     form.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
 
-    const text = `🔔 Новая заявка с сайта!\n\n🌐 Сайт: ${website}\n📱 Контакт: ${phone || 'не указан'}\n📅 ${new Date().toLocaleString('ru-RU')}`;
-
-    if (BOT_TOKEN !== 'YOUR_BOT_TOKEN' && CHAT_ID !== 'YOUR_CHAT_ID') {
-        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: CHAT_ID, text })
-        }).catch(() => {});
+    if (!sentToBackend) {
+        const msg = encodeURIComponent(`Здравствуйте! Хочу бесплатный аудит сайта.\n\nСайт: ${website}\nТелефон/Telegram: ${phone || 'не указан'}`);
+        setTimeout(() => {
+            window.open(`https://t.me/Elen_just_Elen?text=${msg}`, '_blank');
+        }, 1500);
     }
-
-    const msg = encodeURIComponent(`Здравствуйте! Хочу бесплатный аудит сайта.\n\nСайт: ${website}\nТелефон/Telegram: ${phone || 'не указан'}`);
-    setTimeout(() => {
-        window.open(`https://t.me/Elen_just_Elen?text=${msg}`, '_blank');
-    }, 1500);
 
     return false;
 }
